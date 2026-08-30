@@ -237,13 +237,23 @@ Sample Prompts to Try After Pasting This Document
 
 Copy any of these directly, or write your own in the same spirit:
 
-• "Using the formula above, compute the Cycle and Year for [any date you want to test]. Show every step."
-• "I have a historically-documented event dated to [year]. Does it land on a Jubilee, the cycle's mid-point, or an ordinary sabbatical position? What is your source for that date, and how confident is it?"
-• "Are there other externally-attested ancient events, independent of this research, that might land on Y=1? Help me identify candidates and check them."
-• "Check whether my proposed connection between [event A] and [event B] is a genuine epoch-confirming match or just an epoch-independent continuity match, using the reasoning-error section above."
-• "Walk me through verifying the 196-year weekday rule's arithmetic yourself, step by step, without taking the document's word for it."
-• "Explain back to me, in your own words, exactly which of the four epoch-derivation paths is not independent of the 49-year structure, and why."
-• "Help me run a proper blind phase test using a genuinely large, independent dataset of ancient events you're aware of — not just the ones already mentioned in this document."
+• “Using the formula, compute the Cycle and Year for the Crucifixion year AD 30. Show every step and tell me if it lands on a Jubilee, mid-point, or ordinary sabbatical.”
+• “What Cycle and Year does 457 BC (the decree of Artaxerxes) fall into? Is it a Jubilee?”
+• “Check the year of the destruction of the Second Temple in AD 70. Does it align with any special position in the 49-year cycle?”
+• “What position does the traditional date for the Exodus (around 1446 or 1437 BC) occupy? Show the calculation.”  High-interest biblical connections
+• “Walk me through Daniel’s Seventy Weeks using the 457 BC starting point. How many years pass until AD 30, and does the math land cleanly on the crucifixion?”
+• “Does the year Jerusalem fell to Babylon (586 or 587 BC) land on a sabbatical or Jubilee position? Check both candidate years.”
+• “Test the year of Jesus’ birth (commonly placed at 4 BC or 5 BC). What Cycle and Year does it receive?”
+• “Check the year of the First Temple’s dedication under Solomon (around 966 BC). Does it have any special cycle position?”  Day-of-week & lunar tools (very popular)
+• “Using the 196-year weekday rule and the lunar tools, verify that Nisan 14 in AD 30 fell on a Friday. Show the steps.”
+• “What was the approximate moon phase and likely first crescent visibility from Jerusalem for the Passover of AD 30?”
+• “Can you confirm the day of the week for the traditional Resurrection date (Sunday after Nisan 14, AD 30)?”  Modern / popular interest angles
+• “What is the nearest past and next future Jubilee year according to this system? Show the calculation for both.”
+• “Is there a Jubilee or sabbatical year near 2017–2018 or 2024–2025 according to this calendar?”  Slightly deeper but still accessible
+• “I have a historically dated event in [year]. Does it land on a Jubilee (Y=1), a mid-point year, or an ordinary sabbatical? What is the historical source confidence for that date?”
+• “Help me run a simple Blind Phase Test: take these three well-known dates [list them] and see whether their alignment survives when the whole calendar is shifted by different amounts.”
+• “Explain in plain language the difference between a Year-Type (Sunday-Type, Wednesday-Type, etc.) and the actual day of the week of a specific date.”  
+
 
 The goal of this kit is not to hand you a finished conclusion — it is to give you and any AI system you're working with a shared, checkable starting point, so your own research can extend, test, and challenge this material rather than simply repeat it.
 
