@@ -1,11 +1,13 @@
-The CJC Research Kit: A Self-Contained Tool for AI-Assisted Verification
+The CJC Research Kit: A Self-Contained Tool for AI-Assisted Biblical dating in accordance with Scripture's Calendar as given to Moses; proving modern time continuum from 1437BC-Present
 
 Version 12.5 — September 1, 2026. Full revision history and reasoning: see CHANGELOG.md, filed alongside this kit.
 
 How to Use This Document
+***NOTE IMPORTANT*** Some AI Like Grok and Perplexity and a few others can fetch this calculator on their own if you just provide them the https:// URL at the top of this website***
+Here' is another link you can try if the AI you use fails to retrieve: https://bit.ly/4cpi9Cu 
 
 This entire document is designed to be copied in full and pasted directly into any major AI chat system — ChatGPT, Gemini, Claude, Copilot, or Grok all work equally well, since the content below relies on nothing but plain arithmetic any of them can execute reliably. Once pasted, use the sample prompts at the end (or your own questions) to start testing dates, checking historical events, and exploring the Continuous Jubilee Calendar's math for yourself, with the AI doing the arithmetic and you checking its work against real sources.
-***NOTE IMPORTANT*** Some AI Like Grok and Perplexity and a few others can fetch Scripture's CJC Calendar if you just provide them the https:// URL at the top of this website***
+
 Nothing below asks the AI to take anything on faith. Every claim is either a formula you can verify by hand, or a comparison against a real, independently-documented historical date you can look up yourself.
 
 Quick Start (For Returning Readers)
