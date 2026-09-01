@@ -1,11 +1,11 @@
 The CJC Research Kit: A Self-Contained Tool for AI-Assisted Verification
 
-Version 12.4 — September 1, 2026. Full revision history and reasoning: see CHANGELOG.md, filed alongside this kit.
+Version 12.5 — September 1, 2026. Full revision history and reasoning: see CHANGELOG.md, filed alongside this kit.
 
 How to Use This Document
 
 This entire document is designed to be copied in full and pasted directly into any major AI chat system — ChatGPT, Gemini, Claude, Copilot, or Grok all work equally well, since the content below relies on nothing but plain arithmetic any of them can execute reliably. Once pasted, use the sample prompts at the end (or your own questions) to start testing dates, checking historical events, and exploring the Continuous Jubilee Calendar's math for yourself, with the AI doing the arithmetic and you checking its work against real sources.
-
+***NOTE IMPORTANT*** Some AI Like Grok and Perplexity and a few others can fetch Scripture's CJC Calendar if you just provide them the https:// URL at the top of this website***
 Nothing below asks the AI to take anything on faith. Every claim is either a formula you can verify by hand, or a comparison against a real, independently-documented historical date you can look up yourself.
 
 Quick Start (For Returning Readers)
@@ -127,6 +127,20 @@ The High Sabbath overlap. John 19:31 describes the day after the crucifixion as 
 Of these four, three actually discriminate between the candidates (mid-week position, ministry length, and the age parallel below); the High Sabbath overlap, as just noted, does not. None of the three discriminating criteria depend on the eclipse argument, on Acts 2:20, or on Humphreys and Waddington's own stated preference. The honest version of the case for AD 33, worth stating fairly rather than dismissing, rests specifically on the ministry-length question above — a real, minority reading of John's Gospel implying a longer ministry — not on the eclipse account, which (once the Acts 2:20 connection is set aside, as this framework does) does not distinguish between the two years at all.
 
 A note on evidence tiers, and two nearby years checked against the same criteria. It's worth keeping three tiers of evidence distinct here: what Scripture requires (a Friday Preparation Day, Nisan 14 per Exodus 12:2, 12:6, and Leviticus 23:5, a High Sabbath following), what the CJC's own math computes (the Y-position), and what independent astronomical/historical reconstruction corroborates (the specific weekday and illumination). A lower tier should never override a higher one — Y=46 is a CJC-internal observation, not a scriptural requirement, and shouldn't be used to select a date that fails the scriptural Friday requirement outright. Checked directly against two nearby years sometimes proposed as alternatives: AD 32's Nisan 14 falls on a Sunday, and AD 34's falls on a Wednesday — both fail the Friday requirement on astronomical grounds alone, independent of any CJC year-position question. AD 34 does compute to Y=1, a Jubilee position — but this is stated here strictly as an observation, not as a reason to prefer it: a chronology that selected its crucifixion year because it lands on a desired Jubilee position, rather than because it satisfies the scriptural and historical requirements first, would be reasoning circularly. AD 34 fails the Friday requirement, so its Jubilee position carries no weight toward a crucifixion-date claim.
+
+From Crucifixion to Pentecost: The Full Passion-Week Timeline, Computed and Cross-Checked
+
+With Nisan 14/April 7, AD 30 established as a Friday, the rest of the Passion Week sequence follows by direct calendar arithmetic from Scripture's own stated intervals — no new assumptions required beyond the crucifixion date itself. Every result below was independently verified two separate ways (standard Julian Day Number conversion, and a second, wholly independent pure weekday-cycling check with no JD math at all) before being included here, specifically to catch the kind of small counting error this kind of calculation is prone to.
+
+Resurrection — April 9, AD 30, Sunday. The Gospels describe the resurrection on "the third day" from the crucifixion (Matthew 16:21, Luke 24:46, 1 Corinthians 15:4), using the standard inclusive counting convention (Friday = day one, Saturday = day two, Sunday = day three). Two days after Friday, April 7 lands on Sunday, April 9 — confirmed by both independent methods above.
+
+Ascension — May 18, AD 30, Thursday. Acts 1:3 states Jesus appeared to the apostles "over a period of forty days" after the resurrection. Counting forty days inclusively from Sunday, April 9 (day one) reaches Thursday, May 18 — confirmed by both methods. This independently derived result matches the long-standing church observance of "Ascension Thursday," here reached through pure arithmetic from the crucifixion date rather than tradition.
+
+Pentecost — May 28, AD 30, Sunday. Leviticus 23:15-16 instructs counting fifty days from "the day after the Sabbath" (the Firstfruits offering) to reach the Feast of Weeks. Under the reading this kit uses — where Nisan 15 (Saturday, April 8) is the High Sabbath and Nisan 16 (Sunday, April 9) is Firstfruits — fifty days counted inclusively from Sunday, April 9 reaches Sunday, May 28. This matches Acts 2:1's description of Pentecost as a specific, known day, and the result is a genuine, unforced consequence of the same counting instruction and the same crucifixion anchor — no separate assumption was introduced to reach it.
+
+Temple destruction — Josephus places this around the 10th of Av, AD 70 (*Jewish War* 6.4.5-8), an event independent of the crucifixion-week calculation above and checked separately. Because the Jewish calendar in this period still relied on direct crescent observation rather than the fixed calculated calendar adopted around AD 359, the exact civil date depends on whether the intervening months (Iyar, Sivan, Tammuz) ran 29 or 30 days — a real, unresolved variable, not a gap in this kit's own method. This produces a genuine range: August 6 (Monday) through August 8 (Wednesday), AD 70, with August 7 (Tuesday) as the most commonly cited reconstruction. State this range explicitly rather than presenting a single day as certain — this is one of the few dates in this kit where the underlying calendar itself, not the arithmetic, is the source of the uncertainty.
+
+CJC position for all four Passion-Week events: since Resurrection, Ascension, and Pentecost all fall within the same calendar year as the crucifixion itself, they share its Y-value (Y=46, Cycle 30) rather than introducing separate year-level anchors — their significance is calendrical, confirming the internal week-by-week sequence of Passion Week, not additional Jubilee or mid-point data.
 
 The Falsifiable Claim, With Real Dates
 
