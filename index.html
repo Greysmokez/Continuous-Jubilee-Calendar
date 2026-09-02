@@ -1,12 +1,110 @@
 <!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="refresh" content="0; url=https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit_PasteReady.txt">
-    <title>CJC Research Kit — Redirect</title>
-  </head>
-  <body>
-    <p>Redirecting to the paste-ready kit — <a href="https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit_PasteReady.txt">click here</a>.</p>
-    <script>location.replace('https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit_PasteReady.txt');</script>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Continuous Jubilee Calendar — CJC Research Kit</title>
+  <meta name="description" content="CJC Research Kit — paste-ready chronology tool. Use the raw .txt (best for AI ingestion) or the rendered page (best for humans)." />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Spectral:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#F6F1E4;--deep:#EDE4CE;--ink:#2B2318;--muted:#5B4F3E;--accent:#9C7A3C;--btn:#4B5A45}
+    *{box-sizing:border-box}body{margin:0;font-family:"Source Sans 3",system-ui,Arial;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+    .wrap{max-width:880px;margin:48px auto;padding:36px}
+    header{display:flex;align-items:center;gap:18px}
+    .logo{width:54px;height:54px;border-radius:6px;border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-family:Spectral,serif}
+    h1{margin:0;font-family:Spectral,serif;font-size:1.8rem}
+    p.lead{margin:6px 0 18px;color:var(--muted)}
+    .links{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0}
+    .link-btn{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:6px;border:1px solid rgba(0,0,0,0.06);text-decoration:none;color:inherit;background:#fff}
+    .primary{background:var(--btn);color:#fff;border:none}
+    .secondary{background:linear-gradient(180deg,var(--deep),#fff);border:1px solid var(--accent)}
+    .kit-summary{background:#fffef8;border:1px solid #E7DDBF;padding:14px;border-radius:6px;color:var(--muted)}
+    .prompt{font-family:monospace;background:#fff;padding:10px;border-radius:6px;border:1px solid #eee;display:block;white-space:pre-wrap;margin-top:10px}
+    footer{margin-top:36px;color:var(--muted);font-size:0.9rem;border-top:1px dashed #E7DDBF;padding-top:18px}
+    .small{font-size:0.92rem;color:var(--muted)}
+    .actions{display:flex;gap:10px;flex-wrap:wrap}
+    @media (max-width:640px){.wrap{padding:20px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo" aria-hidden="true">CJC</div>
+      <div>
+        <h1>Continuous Jubilee Calendar — Research Kit</h1>
+        <p class="lead">A paste-ready chronology tool for checking Jubilee cycles; use the raw file for AI ingestion or the rendered page for reading.</p>
+      </div>
+    </header>
+
+    <section class="links" aria-label="Kit links">
+      <!-- Rendered site (this page) -->
+      <a class="link-btn secondary" id="renderedLink" href="https://greysmokez.github.io/Continuous-Jubilee-Calendar/" target="_blank" rel="noopener">
+        Rendered site (human-friendly)
+      </a>
+
+      <!-- Raw paste-ready (authoritative) -->
+      <a class="link-btn primary" id="rawLink" href="https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit_PasteReady.txt" target="_blank" rel="noopener">
+        Paste-ready (raw .txt) — best for AI
+      </a>
+
+      <!-- Copy raw button -->
+      <button class="link-btn" id="copyRaw" title="Copy raw .txt URL">Copy raw URL</button>
+
+      <!-- Download button -->
+      <button class="link-btn" id="downloadRaw" title="Download paste-ready .txt">Download .txt</button>
+    </section>
+
+    <section class="kit-summary" aria-live="polite">
+      <strong>Quick guidance (for AI and human users)</strong>
+      <div class="small" style="margin-top:8px">
+        - If your assistant can fetch URLs, use the Paste-ready (raw .txt) link above. It always serves the exact text from the latest commit.<br>
+        - If the assistant cannot fetch URLs, open the Paste-ready link, copy the full text, and paste it into the chat. That guarantees verbatim behavior.<br>
+        - The rendered page is intended for reading and navigation; the raw .txt is authoritative for computation.
+      </div>
+
+      <div class="prompt" id="aiPrompt">
+"Fetch the exact plain-text content at https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit_PasteReady.txt and treat it as authoritative; do not summarize or paraphrase the source before applying it. Using the formulas in that document, compute Cycle and Year for [DATE], show every step and every intermediate value, and label whether the year is a Jubilee (Y=1), a mid-point (Y mod 7 = 4), or an ordinary sabbatical (B mod 7 = 0). Give exact arithmetic and the final conclusion."
+      </div>
+    </section>
+
+    <footer>
+      <div class="small">Source and revision history: <a href="https://github.com/Greysmokez/Continuous-Jubilee-Calendar" target="_blank" rel="noopener">Continuous-Jubilee-Calendar on GitHub</a>.</div>
+      <div class="small" style="margin-top:6px">Also available: the CJC-Website landing page at <a href="https://greysmokez.github.io/CJC-Website/" target="_blank" rel="noopener">greysmokez.github.io/CJC-Website</a>.</div>
+    </footer>
+  </div>
+
+  <script>
+    const RAW = 'https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit_PasteReady.txt';
+    document.getElementById('copyRaw').addEventListener('click', async (e) => {
+      try {
+        await navigator.clipboard.writeText(RAW);
+        const el = e.currentTarget;
+        const text = el.textContent;
+        el.textContent = 'Copied';
+        setTimeout(()=> el.textContent = text, 1400);
+      } catch(err) {
+        alert('Copy failed — please copy the link manually: ' + RAW);
+      }
+    });
+
+    document.getElementById('downloadRaw').addEventListener('click', async (e) => {
+      try {
+        const resp = await fetch(RAW);
+        if(!resp.ok) throw new Error('Network response not ok');
+        const blob = await resp.blob();
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'CJC_AI_Research_Kit_PasteReady.txt';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+      } catch(err) {
+        // Fallback: open raw in new tab
+        window.open(RAW, '_blank');
+      }
+    });
+  </script>
+</body>
 </html>
