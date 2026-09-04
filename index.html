@@ -43,7 +43,7 @@
       </a>
 
       <!-- Raw paste-ready (authoritative) -->
-      <a class="link-btn primary" id="rawLink" href="https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit_PasteReady.txt" target="_blank" rel="noopener">
+      <a class="link-btn primary" id="rawLink" href="https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJCKit.txt" target="_blank" rel="noopener">
         Paste-ready (raw .txt) — best for AI
       </a>
 
@@ -68,7 +68,7 @@
       </div>
 
       <div class="prompt" id="aiPrompt">
-"Fetch the exact plain-text content at https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit_PasteReady.txt and treat it as authoritative; do not summarize. Then run the full CJC calculation and show your steps."
+"Fetch the exact plain-text content at https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJCKit.txt and treat it as authoritative; do not summarize. Then run the full CJC calculation and show your steps."
       </div>
     </section>
 
@@ -79,7 +79,7 @@
   </div>
 
   <script>
-    const RAW = 'https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit_PasteReady.txt';
+    const RAW = 'https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJCKit.txt';
     document.getElementById('copyRaw').addEventListener('click', async (e) => {
       try {
         await navigator.clipboard.writeText(RAW);
@@ -100,7 +100,7 @@
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'CJC_AI_Research_Kit_PasteReady.txt';
+        a.download = 'CJCKit.txt';
         document.body.appendChild(a);
         a.click();
         a.remove();
