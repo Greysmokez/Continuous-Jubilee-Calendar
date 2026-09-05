@@ -43,14 +43,14 @@
     p.lead {
       color: var(--muted);
       margin-top: 0;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
     }
 
     .cta-row {
       display: flex;
       flex-wrap: wrap;
       gap: 0.75rem;
-      margin: 1.25rem 0 1.75rem;
+      margin: 1.25rem 0;
     }
 
     .btn {
@@ -95,17 +95,31 @@
       opacity: 1;
     }
 
+    .doc {
+      white-space: pre-wrap;
+      font-size: 1rem;
+      color: var(--text);
+    }
+
     .prompt {
       white-space: pre-wrap;
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       color: #d8e2f0;
+      overflow-x: auto;
     }
 
     .note {
       color: var(--muted);
       font-size: 0.98rem;
       margin-top: 0.5rem;
+    }
+
+    .status {
+      margin-top: .5rem;
+      font-size: .95rem;
+      color: #9dd0ff;
+      min-height: 1.2em;
     }
 
     .bottom-links {
@@ -119,20 +133,26 @@
 <body>
   <main class="wrap" id="chapter1-main">
     <h1>Chapter 1 Scriptures Core Calendar Framework</h1>
-    <p class="lead">Supporting document for the Continuous Jubilee Calendar (CJC) method.</p>
+    <p class="lead">Read Chapter 1 below. Use the button to copy CJC Kit fetch commands and open ChatGPT.</p>
 
-    <div class="cta-row">
-      <button class="btn primary" id="openAiCopyBtn" type="button">Open AI + Copy Prompt</button>
-    </div>
-
-    <section class="panel" aria-label="Prompt block" id="chapter1-content">
-      <div id="promptText" class="prompt">Please explain "X" of the CJC method from Chapter 1 Scriptures Core Calendar Framework in plain language, step by step, with scriptural references, assumptions, and calendar math examples.</div>
+    <section class="panel" aria-label="Chapter 1 document" id="chapter1-content">
+      <div class="doc" id="chapterDoc">Loading Chapter 1 document...</div>
     </section>
 
-    <p class="note">Click the button to copy the prompt, then paste it into ChatGPT.</p>
+    <div class="cta-row">
+      <button class="btn primary" id="openAiCopyBtn" type="button">Copy CJC Fetch Commands + Open AI</button>
+    </div>
+
+    <section class="panel" aria-label="Commands to copy">
+      <div id="promptText" class="prompt">curl -L "https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJCKit.txt" -o CJCKit.txt
+curl -L "https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit_PasteReady.txt" -o CJC_AI_Research_Kit_PasteReady.txt</div>
+    </section>
+
+    <p class="note">Tip: Click the button, then paste commands into your terminal or into ChatGPT.</p>
+    <p class="status" id="status"></p>
 
     <div class="bottom-links">
-      <a class="btn" href="https://greysmokez.github.io/Continuous-Jubilee-Calendar/">Back to CJC Calendar Home</a>
+      <a class="btn" href="https://greysmokez.github.io/CJC-Website/">Back to CJC-Website</a>
     </div>
   </main>
 
@@ -140,10 +160,12 @@
     (function () {
       const main = document.getElementById('chapter1-main');
       const content = document.getElementById('chapter1-content');
+      const docEl = document.getElementById('chapterDoc');
       const promptEl = document.getElementById('promptText');
       const comboBtn = document.getElementById('openAiCopyBtn');
+      const statusEl = document.getElementById('status');
 
-      [main, content].forEach((el) => {
+      [main, content, docEl].forEach((el) => {
         if (!el) return;
         el.hidden = false;
         el.style.display = 'block';
@@ -151,21 +173,47 @@
         el.style.opacity = '1';
       });
 
-      async function copyPrompt() {
+      async function loadChapterText() {
         try {
-          const text = (promptEl?.textContent || '').trim();
-          await navigator.clipboard.writeText(text);
-          const old = comboBtn.textContent;
-          comboBtn.textContent = 'Copied! Opening ChatGPT...';
-          window.open('https://chat.openai.com/', '_blank', 'noopener');
-          setTimeout(() => (comboBtn.textContent = old), 1400);
-        } catch (err) {
-          window.open('https://chat.openai.com/', '_blank', 'noopener');
-          alert('ChatGPT opened. Clipboard copy failed, so please copy the prompt text manually.');
+          const res = await fetch('CJCKit.txt', { cache: 'no-store' });
+          if (!res.ok) throw new Error('Could not fetch CJCKit.txt');
+          const text = await res.text();
+          docEl.textContent = text && text.trim() ? text : 'Chapter 1 document is empty.';
+        } catch (e) {
+          docEl.textContent = 'Could not load chapter text from CJCKit.txt. Please verify the file exists in this repository root.';
         }
       }
 
-      comboBtn?.addEventListener('click', copyPrompt);
+      async function copyAndOpenAI() {
+        const text = (promptEl?.textContent || '').trim();
+        try {
+          await navigator.clipboard.writeText(text);
+          statusEl.textContent = 'Copied CJC fetch commands to clipboard.';
+        } catch (err) {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.setAttribute('readonly', '');
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          try {
+            document.execCommand('copy');
+            statusEl.textContent = 'Copied CJC fetch commands to clipboard.';
+          } catch (e) {
+            statusEl.textContent = 'Clipboard copy failed. Select and copy commands manually below.';
+          }
+          document.body.removeChild(ta);
+        }
+
+        const old = comboBtn.textContent;
+        comboBtn.textContent = 'Opening AI...';
+        window.open('https://chat.openai.com/', '_blank', 'noopener');
+        setTimeout(() => (comboBtn.textContent = old), 1200);
+      }
+
+      comboBtn?.addEventListener('click', copyAndOpenAI);
+      loadChapterText();
     })();
   </script>
 </body>
