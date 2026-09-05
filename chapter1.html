@@ -29,6 +29,9 @@
       max-width: 960px;
       margin: 0 auto;
       padding: 2rem 1rem 3rem;
+      display: block;
+      visibility: visible;
+      opacity: 1;
     }
 
     h1 {
@@ -87,6 +90,9 @@
       border-radius: 0.8rem;
       padding: 1rem;
       margin: 1rem 0;
+      display: block;
+      visibility: visible;
+      opacity: 1;
     }
 
     .prompt {
@@ -102,12 +108,6 @@
       margin-top: 0.5rem;
     }
 
-    hr {
-      border: 0;
-      border-top: 1px solid var(--border);
-      margin: 2rem 0;
-    }
-
     .bottom-links {
       display: flex;
       gap: 0.75rem;
@@ -117,52 +117,56 @@
   </style>
 </head>
 <body>
-  <main class="wrap">
+  <main class="wrap" id="chapter1-main">
     <h1>Chapter 1 Scriptures Core Calendar Framework</h1>
     <p class="lead">Supporting document for the Continuous Jubilee Calendar (CJC) method.</p>
 
     <div class="cta-row">
-      <a class="btn primary" target="_blank" rel="noopener" href="https://chat.openai.com/">Open AI</a>
-      <button class="btn" id="copyPromptTop" type="button">Copy Prompt</button>
+      <button class="btn primary" id="openAiCopyBtn" type="button">Open AI + Copy Prompt</button>
     </div>
 
-    <section class="panel" aria-label="Prompt block">
-      <div id="promptText" class="prompt">Please explain "X" of the CJC method from Chapter 1 Scriptures Core Calendar Framework in plain language, step by step, with scriptural references, assumptions, and a short practical example.</div>
+    <section class="panel" aria-label="Prompt block" id="chapter1-content">
+      <div id="promptText" class="prompt">Please explain "X" of the CJC method from Chapter 1 Scriptures Core Calendar Framework in plain language, step by step, with scriptural references, assumptions, and calendar math examples.</div>
     </section>
 
-    <p class="note">Note: Paste the copied prompt into AI and ask it to explain “X” of the CJC method.</p>
-
-    <hr />
-
-    <div class="cta-row">
-      <a class="btn primary" target="_blank" rel="noopener" href="https://chat.openai.com/">Open AI</a>
-      <button class="btn" id="copyPromptBottom" type="button">Copy Prompt</button>
-    </div>
+    <p class="note">Click the button to copy the prompt, then paste it into ChatGPT.</p>
 
     <div class="bottom-links">
-      <a class="btn" href="https://greysmokez.github.io/CJC-Website/">Back to CJC-Website</a>
       <a class="btn" href="https://greysmokez.github.io/Continuous-Jubilee-Calendar/">Back to CJC Calendar Home</a>
     </div>
   </main>
 
   <script>
-    const promptEl = document.getElementById('promptText');
-    const topBtn = document.getElementById('copyPromptTop');
-    const bottomBtn = document.getElementById('copyPromptBottom');
+    (function () {
+      const main = document.getElementById('chapter1-main');
+      const content = document.getElementById('chapter1-content');
+      const promptEl = document.getElementById('promptText');
+      const comboBtn = document.getElementById('openAiCopyBtn');
 
-    async function copyPrompt(button) {
-      try {
-        await navigator.clipboard.writeText(promptEl.textContent.trim());
-        const old = button.textContent;
-        button.textContent = 'Copied!';
-        setTimeout(() => (button.textContent = old), 1200);
-      } catch (err) {
-        alert('Could not copy automatically. Please copy the prompt text manually.');
+      [main, content].forEach((el) => {
+        if (!el) return;
+        el.hidden = false;
+        el.style.display = 'block';
+        el.style.visibility = 'visible';
+        el.style.opacity = '1';
+      });
+
+      async function copyPrompt() {
+        try {
+          const text = (promptEl?.textContent || '').trim();
+          await navigator.clipboard.writeText(text);
+          const old = comboBtn.textContent;
+          comboBtn.textContent = 'Copied! Opening ChatGPT...';
+          window.open('https://chat.openai.com/', '_blank', 'noopener');
+          setTimeout(() => (comboBtn.textContent = old), 1400);
+        } catch (err) {
+          window.open('https://chat.openai.com/', '_blank', 'noopener');
+          alert('ChatGPT opened. Clipboard copy failed, so please copy the prompt text manually.');
+        }
       }
-    }
 
-    topBtn.addEventListener('click', () => copyPrompt(topBtn));
-    bottomBtn.addEventListener('click', () => copyPrompt(bottomBtn));
+      comboBtn?.addEventListener('click', copyPrompt);
+    })();
   </script>
 </body>
 </html>
