@@ -133,22 +133,42 @@
 <body>
   <main class="wrap" id="chapter1-main">
     <h1>Chapter 1 Scriptures Core Calendar Framework</h1>
-    <p class="lead">Read Chapter 1 below. Use the button to copy CJC Kit fetch commands and open ChatGPT.</p>
+    <p class="lead">Read Chapter 1 below. Click <strong>Open AI + Prompt</strong> to copy a CJC teaching prompt and open ChatGPT.</p>
 
     <section class="panel" aria-label="Chapter 1 document" id="chapter1-content">
       <div class="doc" id="chapterDoc">Loading Chapter 1 document...</div>
     </section>
 
     <div class="cta-row">
-      <button class="btn primary" id="openAiCopyBtn" type="button">Copy CJC Fetch Commands + Open AI</button>
+      <button class="btn primary" id="openAiCopyBtn" type="button">Open AI + Prompt</button>
     </div>
 
-    <section class="panel" aria-label="Commands to copy">
-      <div id="promptText" class="prompt">curl -L "https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJCKit.txt" -o CJCKit.txt
-curl -L "https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit_PasteReady.txt" -o CJC_AI_Research_Kit_PasteReady.txt</div>
+    <section class="panel" aria-label="Prompt to copy">
+      <div id="promptText" class="prompt">You are an expert tutor for the Continuous Jubilee Calendar (CJC) method.
+
+Primary source materials:
+1) https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJCKit.txt
+2) https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit_PasteReady.txt
+3) https://greysmokez.github.io/Continuous-Jubilee-Calendar/chapter1.html
+
+Your job:
+- Teach the CJC method clearly to beginners and advanced users.
+- Answer user questions using the CJC sources above.
+- When uncertain, state uncertainty clearly.
+- Keep explanations step-by-step.
+- Cite which source content the answer is based on.
+- If asked for calculations, show exact math and assumptions.
+- If asked about scripture links, provide references and explain relevance.
+- Do not invent unsupported claims outside provided CJC materials.
+
+Response format:
+1) Short direct answer
+2) Step-by-step explanation
+3) Supporting CJC references used
+4) Optional “next question you can ask me”</div>
     </section>
 
-    <p class="note">Tip: Click the button, then paste commands into your terminal or into ChatGPT.</p>
+    <p class="note">Tip: Click the button, then paste into ChatGPT to start a guided CJC tutoring session.</p>
     <p class="status" id="status"></p>
 
     <div class="bottom-links">
@@ -188,7 +208,7 @@ curl -L "https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calenda
         const text = (promptEl?.textContent || '').trim();
         try {
           await navigator.clipboard.writeText(text);
-          statusEl.textContent = 'Copied CJC fetch commands to clipboard.';
+          statusEl.textContent = 'Prompt copied to clipboard. Paste it into ChatGPT.';
         } catch (err) {
           const ta = document.createElement('textarea');
           ta.value = text;
@@ -199,9 +219,9 @@ curl -L "https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calenda
           ta.select();
           try {
             document.execCommand('copy');
-            statusEl.textContent = 'Copied CJC fetch commands to clipboard.';
+            statusEl.textContent = 'Prompt copied to clipboard. Paste it into ChatGPT.';
           } catch (e) {
-            statusEl.textContent = 'Clipboard copy failed. Select and copy commands manually below.';
+            statusEl.textContent = 'Clipboard copy failed. Select and copy the prompt manually below.';
           }
           document.body.removeChild(ta);
         }
