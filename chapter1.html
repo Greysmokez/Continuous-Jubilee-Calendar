@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chapter 1 Scriptures Core Calendar Framework</title>
+  <style>
+    :root {
+      --bg: #0f1115;
+      --panel: #171a21;
+      --text: #e8ecf1;
+      --muted: #a8b3c2;
+      --accent: #63b3ff;
+      --accent-hover: #8ac8ff;
+      --border: #2a3140;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    .wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2rem 1rem 3rem;
+    }
+
+    h1 {
+      font-size: clamp(1.6rem, 2.4vw, 2.4rem);
+      margin: 0 0 0.75rem;
+      line-height: 1.2;
+    }
+
+    p.lead {
+      color: var(--muted);
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin: 1.25rem 0 1.75rem;
+    }
+
+    .btn {
+      appearance: none;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, #1f2633, #1a2230);
+      color: var(--text);
+      padding: 0.7rem 1rem;
+      border-radius: 0.65rem;
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.16s ease;
+    }
+
+    .btn:hover {
+      border-color: var(--accent);
+      color: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn.primary {
+      border-color: #2b6cb0;
+      background: linear-gradient(180deg, #2b6cb0, #22548a);
+      color: #fff;
+    }
+
+    .btn.primary:hover {
+      border-color: #63b3ff;
+      background: linear-gradient(180deg, #357bc8, #2b6cb0);
+      color: #fff;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 0.8rem;
+      padding: 1rem;
+      margin: 1rem 0;
+    }
+
+    .prompt {
+      white-space: pre-wrap;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 0.95rem;
+      color: #d8e2f0;
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 0.98rem;
+      margin-top: 0.5rem;
+    }
+
+    hr {
+      border: 0;
+      border-top: 1px solid var(--border);
+      margin: 2rem 0;
+    }
+
+    .bottom-links {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>Chapter 1 Scriptures Core Calendar Framework</h1>
+    <p class="lead">Supporting document for the Continuous Jubilee Calendar (CJC) method.</p>
+
+    <div class="cta-row">
+      <a class="btn primary" target="_blank" rel="noopener" href="https://chat.openai.com/">Open AI</a>
+      <button class="btn" id="copyPromptTop" type="button">Copy Prompt</button>
+    </div>
+
+    <section class="panel" aria-label="Prompt block">
+      <div id="promptText" class="prompt">Please explain "X" of the CJC method from Chapter 1 Scriptures Core Calendar Framework in plain language, step by step, with scriptural references, assumptions, and a short practical example.</div>
+    </section>
+
+    <p class="note">Note: Paste the copied prompt into AI and ask it to explain “X” of the CJC method.</p>
+
+    <hr />
+
+    <div class="cta-row">
+      <a class="btn primary" target="_blank" rel="noopener" href="https://chat.openai.com/">Open AI</a>
+      <button class="btn" id="copyPromptBottom" type="button">Copy Prompt</button>
+    </div>
+
+    <div class="bottom-links">
+      <a class="btn" href="https://greysmokez.github.io/CJC-Website/">Back to CJC-Website</a>
+      <a class="btn" href="https://greysmokez.github.io/Continuous-Jubilee-Calendar/">Back to CJC Calendar Home</a>
+    </div>
+  </main>
+
+  <script>
+    const promptEl = document.getElementById('promptText');
+    const topBtn = document.getElementById('copyPromptTop');
+    const bottomBtn = document.getElementById('copyPromptBottom');
+
+    async function copyPrompt(button) {
+      try {
+        await navigator.clipboard.writeText(promptEl.textContent.trim());
+        const old = button.textContent;
+        button.textContent = 'Copied!';
+        setTimeout(() => (button.textContent = old), 1200);
+      } catch (err) {
+        alert('Could not copy automatically. Please copy the prompt text manually.');
+      }
+    }
+
+    topBtn.addEventListener('click', () => copyPrompt(topBtn));
+    bottomBtn.addEventListener('click', () => copyPrompt(bottomBtn));
+  </script>
+</body>
+</html>
