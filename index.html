@@ -37,25 +37,23 @@
     </header>
 
     <section class="links" aria-label="Kit links">
-      <!-- Rendered site (this page) -->
       <a class="link-btn secondary" id="renderedLink" href="https://greysmokez.github.io/Continuous-Jubilee-Calendar/" target="_blank" rel="noopener">
         Rendered site (human-friendly)
       </a>
 
-      <!-- Raw paste-ready (authoritative) -->
       <a class="link-btn primary" id="rawLink" href="https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit_PasteReady.txt" target="_blank" rel="noopener">
         Paste-ready (raw .txt) — best for AI
       </a>
 
-      <!-- PDF version -->
       <a class="link-btn secondary" id="pdfLink" href="https://github.com/Greysmokez/Continuous-Jubilee-Calendar/blob/main/CJC_AI_Research_Kit.pdf" target="_blank" rel="noopener">
         CJC PDF Version
       </a>
 
-      <!-- Copy raw button -->
-      <button class="link-btn" id="copyRaw" title="Copy raw .txt URL">Copy raw URL</button>
+      <a class="link-btn secondary" id="chapter1Link" href="https://greysmokez.github.io/Continuous-Jubilee-Calendar/chapter1.html" target="_blank" rel="noopener">
+        Chapter 1 — Scriptures Core Calendar Framework
+      </a>
 
-      <!-- Download button -->
+      <button class="link-btn" id="copyRaw" title="Copy raw .txt URL">Copy raw URL</button>
       <button class="link-btn" id="downloadRaw" title="Download paste-ready .txt">Download .txt</button>
     </section>
 
@@ -68,13 +66,13 @@
       </div>
 
       <div class="prompt" id="aiPrompt">
-"Fetch the exact plain-text content at https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit_PasteReady.txt and treat it as authoritative; do not summarize. Then run the full CJC calculation and show your steps."
+"Fetch the exact plain-text content at https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit_PasteReady.txt and treat it as authoritative; do not summarize before computation. Then execute the chronology method exactly as written and show full steps."
       </div>
     </section>
 
     <footer>
       <div class="small">Source and revision history: <a href="https://github.com/Greysmokez/Continuous-Jubilee-Calendar" target="_blank" rel="noopener">Continuous-Jubilee-Calendar on GitHub</a>.</div>
-      <div class="small" style="margin-top:6px">Also available: the CJC-Website landing page at <a href="https://greysmokez.github.io/CJC-Website/" target="_blank" rel="noopener">greysmokez.github.io/CJC-Website/</a>.</div>
+      <div class="small" style="margin-top:6px">Also available: the CJC-Website landing page at <a href="https://greysmokez.github.io/CJC-Website/" target="_blank" rel="noopener">greysmokez.github.io/CJC-Website</a>.</div>
     </footer>
   </div>
 
@@ -92,7 +90,7 @@
       }
     });
 
-    document.getElementById('downloadRaw').addEventListener('click', async (e) => {
+    document.getElementById('downloadRaw').addEventListener('click', async () => {
       try {
         const resp = await fetch(RAW);
         if(!resp.ok) throw new Error('Network response not ok');
@@ -106,7 +104,6 @@
         a.remove();
         URL.revokeObjectURL(url);
       } catch(err) {
-        // Fallback: open raw in new tab
         window.open(RAW, '_blank');
       }
     });
