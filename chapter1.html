@@ -51,6 +51,7 @@
       flex-wrap: wrap;
       gap: 0.75rem;
       margin: 1.25rem 0;
+      align-items: center;
     }
 
     .btn {
@@ -82,6 +83,15 @@
       border-color: #63b3ff;
       background: linear-gradient(180deg, #357bc8, #2b6cb0);
       color: #fff;
+    }
+
+    .platform-select {
+      background: #0f1624;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 0.6rem;
+      padding: 0.65rem 0.75rem;
+      font-weight: 600;
     }
 
     .panel {
@@ -133,15 +143,21 @@
 <body>
   <main class="wrap" id="chapter1-main">
     <h1>Chapter 1 Scriptures Core Calendar Framework</h1>
-    <p class="lead">Read Chapter 1 below. Click <strong>Open AI + Prompt</strong> to copy a CJC teaching prompt and open ChatGPT.</p>
+    <p class="lead">Read Chapter 1 below. Click <strong>Open AI + Prompt</strong> to copy a CJC teaching prompt and open your selected AI.</p>
+
+    <div class="cta-row">
+      <label for="aiPlatform" class="note" style="margin:0;">Choose AI:</label>
+      <select id="aiPlatform" class="platform-select" aria-label="Choose AI platform">
+        <option value="chatgpt">ChatGPT</option>
+        <option value="grok">Grok</option>
+        <option value="perplexity">Perplexity</option>
+      </select>
+      <button class="btn primary" id="openAiCopyBtnTop" type="button">Open AI + Prompt</button>
+    </div>
 
     <section class="panel" aria-label="Chapter 1 document" id="chapter1-content">
       <div class="doc" id="chapterDoc">Loading Chapter 1 document...</div>
     </section>
-
-    <div class="cta-row">
-      <button class="btn primary" id="openAiCopyBtn" type="button">Open AI + Prompt</button>
-    </div>
 
     <section class="panel" aria-label="Prompt to copy">
       <div id="promptText" class="prompt">You are an expert tutor for the Continuous Jubilee Calendar (CJC) method.
@@ -168,7 +184,11 @@ Response format:
 4) Optional “next question you can ask me”</div>
     </section>
 
-    <p class="note">Tip: Click the button, then paste into ChatGPT to start a guided CJC tutoring session.</p>
+    <div class="cta-row">
+      <button class="btn primary" id="openAiCopyBtnBottom" type="button">Open AI + Prompt</button>
+    </div>
+
+    <p class="note">Tip: Click either button, then paste into your selected AI chat to start a guided CJC tutoring session.</p>
     <p class="status" id="status"></p>
 
     <div class="bottom-links">
@@ -182,8 +202,16 @@ Response format:
       const content = document.getElementById('chapter1-content');
       const docEl = document.getElementById('chapterDoc');
       const promptEl = document.getElementById('promptText');
-      const comboBtn = document.getElementById('openAiCopyBtn');
+      const topBtn = document.getElementById('openAiCopyBtnTop');
+      const bottomBtn = document.getElementById('openAiCopyBtnBottom');
       const statusEl = document.getElementById('status');
+      const platformEl = document.getElementById('aiPlatform');
+
+      const platformUrls = {
+        chatgpt: 'https://chat.openai.com/',
+        grok: 'https://grok.com/',
+        perplexity: 'https://www.perplexity.ai/'
+      };
 
       [main, content, docEl].forEach((el) => {
         if (!el) return;
@@ -204,11 +232,15 @@ Response format:
         }
       }
 
-      async function copyAndOpenAI() {
+      async function copyPromptAndOpen() {
         const text = (promptEl?.textContent || '').trim();
+        const selected = platformEl?.value || 'chatgpt';
+        const targetUrl = platformUrls[selected] || platformUrls.chatgpt;
+        const platformName = selected.charAt(0).toUpperCase() + selected.slice(1);
+
         try {
           await navigator.clipboard.writeText(text);
-          statusEl.textContent = 'Prompt copied to clipboard. Paste it into ChatGPT.';
+          statusEl.textContent = `Prompt copied to clipboard. Paste it into ${platformName}.`;
         } catch (err) {
           const ta = document.createElement('textarea');
           ta.value = text;
@@ -219,20 +251,26 @@ Response format:
           ta.select();
           try {
             document.execCommand('copy');
-            statusEl.textContent = 'Prompt copied to clipboard. Paste it into ChatGPT.';
+            statusEl.textContent = `Prompt copied to clipboard. Paste it into ${platformName}.`;
           } catch (e) {
             statusEl.textContent = 'Clipboard copy failed. Select and copy the prompt manually below.';
           }
           document.body.removeChild(ta);
         }
 
-        const old = comboBtn.textContent;
-        comboBtn.textContent = 'Opening AI...';
-        window.open('https://chat.openai.com/', '_blank', 'noopener');
-        setTimeout(() => (comboBtn.textContent = old), 1200);
+        const oldTop = topBtn.textContent;
+        const oldBottom = bottomBtn.textContent;
+        topBtn.textContent = 'Opening...';
+        bottomBtn.textContent = 'Opening...';
+        window.open(targetUrl, '_blank', 'noopener');
+        setTimeout(() => {
+          topBtn.textContent = oldTop;
+          bottomBtn.textContent = oldBottom;
+        }, 1200);
       }
 
-      comboBtn?.addEventListener('click', copyAndOpenAI);
+      topBtn?.addEventListener('click', copyPromptAndOpen);
+      bottomBtn?.addEventListener('click', copyPromptAndOpen);
       loadChapterText();
     })();
   </script>
