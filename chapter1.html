@@ -105,10 +105,11 @@
       opacity: 1;
     }
 
-    .doc {
-      white-space: pre-wrap;
-      font-size: 1rem;
-      color: var(--text);
+    .pdf-container {
+      width: 100%;
+      height: 600px;
+      border: 1px solid var(--border);
+      border-radius: 0.8rem;
     }
 
     .prompt {
@@ -156,7 +157,7 @@
     </div>
 
     <section class="panel" aria-label="Chapter 1 document" id="chapter1-content">
-      <div class="doc" id="chapterDoc">Loading Chapter 1 document...</div>
+      <iframe id="pdfViewer" class="pdf-container" src="chapter1.pdf" type="application/pdf"></iframe>
     </section>
 
     <section class="panel" aria-label="Prompt to copy">
@@ -181,7 +182,7 @@ Response format:
 1) Short direct answer
 2) Step-by-step explanation
 3) Supporting CJC references used
-4) Optional “next question you can ask me”</div>
+4) Optional "next question you can ask me"</div>
     </section>
 
     <div class="cta-row">
@@ -200,7 +201,6 @@ Response format:
     (function () {
       const main = document.getElementById('chapter1-main');
       const content = document.getElementById('chapter1-content');
-      const docEl = document.getElementById('chapterDoc');
       const promptEl = document.getElementById('promptText');
       const topBtn = document.getElementById('openAiCopyBtnTop');
       const bottomBtn = document.getElementById('openAiCopyBtnBottom');
@@ -213,24 +213,13 @@ Response format:
         perplexity: 'https://www.perplexity.ai/'
       };
 
-      [main, content, docEl].forEach((el) => {
+      [main, content].forEach((el) => {
         if (!el) return;
         el.hidden = false;
         el.style.display = 'block';
         el.style.visibility = 'visible';
         el.style.opacity = '1';
       });
-
-      async function loadChapterText() {
-        try {
-          const res = await fetch('CJCKit.txt', { cache: 'no-store' });
-          if (!res.ok) throw new Error('Could not fetch CJCKit.txt');
-          const text = await res.text();
-          docEl.textContent = text && text.trim() ? text : 'Chapter 1 document is empty.';
-        } catch (e) {
-          docEl.textContent = 'Could not load chapter text from CJCKit.txt. Please verify the file exists in this repository root.';
-        }
-      }
 
       async function copyPromptAndOpen() {
         const text = (promptEl?.textContent || '').trim();
@@ -271,7 +260,6 @@ Response format:
 
       topBtn?.addEventListener('click', copyPromptAndOpen);
       bottomBtn?.addEventListener('click', copyPromptAndOpen);
-      loadChapterText();
     })();
   </script>
 </body>
