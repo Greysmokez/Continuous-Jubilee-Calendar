@@ -41,18 +41,18 @@
 
     <section class="links" aria-label="Kit links">
       <a class="link-btn secondary" id="hostedLink" href="https://greysmokez.github.io/Continuous-Jubilee-Calendar/" target="_blank" rel="noopener">
-        Hosted kit page
+        Hosted kit page (copy + open)
       </a>
 
       <section class="button-group" aria-labelledby="whatIsCjcTitle">
         <div class="button-group-title" id="whatIsCjcTitle">What is the CJC</div>
         <a class="link-btn secondary" id="chapter1Link" href="https://greysmokez.github.io/Continuous-Jubilee-Calendar/chapter1.html" target="_blank" rel="noopener">
-          Chapter 1 — Scriptures Core Calendar Framework
+          Chapter 1 — Scriptures Core Calendar Framework (copy + open)
         </a>
       </section>
 
       <a class="link-btn primary" id="openAiPrompt" href="https://chat.openai.com/" target="_blank" rel="noopener">
-        Open AI + Prompt
+        Open AI + Prompt (copy + open)
       </a>
     </section>
     <div class="small" id="actionStatus" aria-live="polite" style="min-height:1.2em;margin-top:-6px;margin-bottom:12px"></div>
@@ -126,7 +126,9 @@
 
     const downloadAndOpen = async (e, url, filename, label) => {
       e.preventDefault();
-      if(!openNewTab(url)) {
+      const opened = window.open('about:blank', '_blank', 'noopener=yes');
+      if(opened) opened.opener = null;
+      if(!opened) {
         window.location.assign(url);
         return;
       }
@@ -141,9 +143,11 @@
         document.body.appendChild(a);
         a.click();
         a.remove();
+        opened.location.href = downloadUrl;
         setStatus(`${label}: downloaded + opened`);
         setTimeout(() => URL.revokeObjectURL(downloadUrl), 30000);
       } catch(err) {
+        opened.location.href = url;
         setStatus(`${label}: opened`);
       }
     };
