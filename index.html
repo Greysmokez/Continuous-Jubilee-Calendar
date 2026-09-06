@@ -21,7 +21,7 @@
     .kit-summary{background:#fffef8;border:1px solid #E7DDBF;padding:14px;border-radius:6px;color:var(--muted)}
     .supporting-docs{background:#fffef8;border:1px solid #E7DDBF;padding:14px;border-radius:6px;color:var(--muted);margin-bottom:18px}
     .button-group{display:flex;flex-direction:column;gap:8px}
-    .button-group-title{font-family:Spectral,serif;color:var(--ink)}
+    .button-group-title{font-family:Spectral,serif;color:var(--ink);font-size:1.05rem;margin:0}
     .prompt{font-family:monospace;background:#fff;padding:10px;border-radius:6px;border:1px solid #eee;display:block;white-space:pre-wrap;margin-top:10px}
     footer{margin-top:36px;color:var(--muted);font-size:0.9rem;border-top:1px dashed #E7DDBF;padding-top:18px}
     .small{font-size:0.92rem;color:var(--muted)}
@@ -45,7 +45,7 @@
       </a>
 
       <section class="button-group" aria-labelledby="whatIsCjcTitle">
-        <div class="button-group-title" id="whatIsCjcTitle">What is the CJC</div>
+        <h2 class="button-group-title" id="whatIsCjcTitle">What is the CJC</h2>
         <a class="link-btn secondary" id="chapter1Link" href="https://greysmokez.github.io/Continuous-Jubilee-Calendar/chapter1.html" target="_blank" rel="noopener">
           Chapter 1 — Scriptures Core Calendar Framework (copy + open)
         </a>
@@ -93,7 +93,7 @@
     const CJC_PDF = 'https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit.pdf';
     const CRUCIFIXION_PDF = 'https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/Crucifixion.pdf';
     const CRUCIFIXION_DOCX = 'https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/Crucifixion.docx';
-    const AI_PROMPT = `"Fetch the exact plain-text content at ${RAW} and treat it as authoritative; do not summarize before computation. Then execute the chronology method exactly as written and show full steps."`;
+    const AI_PROMPT = `Fetch the exact plain-text content at ${RAW} and treat it as authoritative; do not summarize before computation. Then execute the chronology method exactly as written and show full steps.`;
 
     document.getElementById('aiPrompt').textContent = AI_PROMPT;
 
@@ -103,6 +103,21 @@
       statusEl.textContent = text;
       clearTimeout(statusTimer);
       statusTimer = setTimeout(() => { statusEl.textContent = ''; }, 2200);
+    };
+
+    const openAndDownloadByUrl = (e, url, filename, label) => {
+      e.preventDefault();
+      if(!openNewTab(url)) {
+        window.location.assign(url);
+        return;
+      }
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setStatus(`${label}: opened + download started`);
     };
 
     const openNewTab = (url) => {
@@ -168,7 +183,7 @@
       downloadAndOpen(e, CRUCIFIXION_PDF, 'Crucifixion.pdf', 'Crucifixion Timeline (PDF)');
     });
     document.getElementById('crucifixionDocxLink').addEventListener('click', (e) => {
-      downloadAndOpen(e, CRUCIFIXION_DOCX, 'Crucifixion.docx', 'Crucifixion Timeline (DOCX)');
+      openAndDownloadByUrl(e, CRUCIFIXION_DOCX, 'Crucifixion.docx', 'Crucifixion Timeline (DOCX)');
     });
   </script>
 </body>
