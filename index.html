@@ -57,6 +57,16 @@
     </section>
     <div class="small" id="copyOpenHelp" style="margin-top:-6px;margin-bottom:6px">These top buttons copy text to your clipboard and open a destination.</div>
     <div class="small" id="actionStatus" aria-live="polite" style="min-height:1.2em;margin-top:-6px;margin-bottom:12px"></div>
+    <noscript>
+      <div class="small" style="margin-bottom:12px">
+        JavaScript is disabled. Use direct links: <a href="https://greysmokez.github.io/Continuous-Jubilee-Calendar/" target="_blank" rel="noopener">Hosted kit page</a>,
+        <a href="https://greysmokez.github.io/Continuous-Jubilee-Calendar/chapter1.html" target="_blank" rel="noopener">Chapter 1</a>,
+        <a href="https://chat.openai.com/" target="_blank" rel="noopener">Open AI</a>,
+        <a href="https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit.pdf" target="_blank" rel="noopener">CJC PDF</a>,
+        <a href="https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/Crucifixion.pdf" target="_blank" rel="noopener">Crucifixion PDF</a>,
+        <a href="https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/Crucifixion.docx" target="_blank" rel="noopener">Crucifixion DOCX</a>.
+      </div>
+    </noscript>
 
     <section class="supporting-docs" aria-label="Supporting Documents">
       <strong>Supporting Documents</strong>
@@ -132,8 +142,7 @@
 
     const downloadAndOpen = async (e, url, filename, label) => {
       e.preventDefault();
-      const opened = window.open('about:blank', '_blank', 'noopener');
-      if(opened) opened.opener = null;
+      const opened = openNewTab(url);
       try {
         const resp = await fetch(url);
         if(!resp.ok) throw new Error('Network response not ok');
@@ -145,16 +154,11 @@
         document.body.appendChild(a);
         a.click();
         a.remove();
-        if(opened) opened.location.href = url;
-        else window.location.assign(url);
+        if(!opened) window.location.assign(url);
         setStatus(`${label}: downloaded + opened`);
         setTimeout(() => URL.revokeObjectURL(downloadUrl), 30000);
       } catch(err) {
-        if(opened) {
-          opened.location.href = url;
-        } else {
-          window.location.assign(url);
-        }
+        if(!opened) window.location.assign(url);
         setStatus(`${label}: opened`);
       }
     };
