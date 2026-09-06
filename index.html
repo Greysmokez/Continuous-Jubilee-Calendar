@@ -55,6 +55,7 @@
         Open AI + Prompt
       </a>
     </section>
+    <div class="small" id="actionStatus" aria-live="polite" style="min-height:1.2em;margin-top:-6px;margin-bottom:12px"></div>
 
     <section class="supporting-docs" aria-label="Supporting Documents">
       <strong>Supporting Documents</strong>
@@ -96,22 +97,39 @@
 
     document.getElementById('aiPrompt').textContent = AI_PROMPT;
 
-    const flash = (el, text) => {
-      const original = el.textContent;
-      el.textContent = text;
-      setTimeout(() => { el.textContent = original; }, 1400);
+    const statusEl = document.getElementById('actionStatus');
+    let statusTimer;
+    const setStatus = (text) => {
+      statusEl.textContent = text;
+      clearTimeout(statusTimer);
+      statusTimer = setTimeout(() => { statusEl.textContent = ''; }, 2200);
     };
 
-    const copyAndOpen = async (button, textToCopy) => {
+    const openNewTab = (url) => {
+      const opened = window.open(url, '_blank', 'noopener=yes');
+      if(opened) opened.opener = null;
+      return opened;
+    };
+
+    const copyAndOpen = async (e, textToCopy, url, label) => {
+      e.preventDefault();
+      if(!openNewTab(url)) {
+        window.location.assign(url);
+      }
       try {
         await navigator.clipboard.writeText(textToCopy);
-        flash(button, 'Copied + Opened');
+        setStatus(`${label}: copied + opened`);
       } catch(err) {
-        flash(button, 'Opened');
+        setStatus(`${label}: opened`);
       }
     };
 
-    const downloadAndOpen = async (button, url, filename) => {
+    const downloadAndOpen = async (e, url, filename, label) => {
+      e.preventDefault();
+      if(!openNewTab(url)) {
+        window.location.assign(url);
+        return;
+      }
       try {
         const resp = await fetch(url);
         if(!resp.ok) throw new Error('Network response not ok');
@@ -123,30 +141,30 @@
         document.body.appendChild(a);
         a.click();
         a.remove();
-        flash(button, 'Downloaded + Opened');
+        setStatus(`${label}: downloaded + opened`);
         setTimeout(() => URL.revokeObjectURL(downloadUrl), 30000);
       } catch(err) {
-        flash(button, 'Opened');
+        setStatus(`${label}: opened`);
       }
     };
 
     document.getElementById('hostedLink').addEventListener('click', (e) => {
-      copyAndOpen(e.currentTarget, HOSTED);
+      copyAndOpen(e, HOSTED, HOSTED, 'Hosted kit page');
     });
     document.getElementById('openAiPrompt').addEventListener('click', (e) => {
-      copyAndOpen(e.currentTarget, AI_PROMPT);
+      copyAndOpen(e, AI_PROMPT, e.currentTarget.href, 'Open AI + Prompt');
     });
     document.getElementById('chapter1Link').addEventListener('click', (e) => {
-      copyAndOpen(e.currentTarget, CHAPTER1);
+      copyAndOpen(e, CHAPTER1, CHAPTER1, 'Chapter 1');
     });
     document.getElementById('pdfLink').addEventListener('click', (e) => {
-      downloadAndOpen(e.currentTarget, CJC_PDF, 'CJC_AI_Research_Kit.pdf');
+      downloadAndOpen(e, CJC_PDF, 'CJC_AI_Research_Kit.pdf', 'CJC PDF Version');
     });
     document.getElementById('crucifixionPdfLink').addEventListener('click', (e) => {
-      downloadAndOpen(e.currentTarget, CRUCIFIXION_PDF, 'Crucifixion.pdf');
+      downloadAndOpen(e, CRUCIFIXION_PDF, 'Crucifixion.pdf', 'Crucifixion Timeline (PDF)');
     });
     document.getElementById('crucifixionDocxLink').addEventListener('click', (e) => {
-      downloadAndOpen(e.currentTarget, CRUCIFIXION_DOCX, 'Crucifixion.docx');
+      downloadAndOpen(e, CRUCIFIXION_DOCX, 'Crucifixion.docx', 'Crucifixion Timeline (DOCX)');
     });
   </script>
 </body>
