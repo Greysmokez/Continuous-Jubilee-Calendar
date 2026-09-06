@@ -15,6 +15,9 @@
     h1{margin:0;font-family:Spectral,serif;font-size:1.8rem}
     p.lead{margin:6px 0 18px;color:var(--muted)}
     .links{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0}
+    .box{background:#fffef8;border:1px solid #E7DDBF;padding:14px;border-radius:6px}
+    .box h2{margin:0 0 10px;font-family:Spectral,serif;font-size:1.25rem}
+    .subhead{margin:6px 0 4px;font-weight:700;color:var(--muted)}
     .link-btn{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:6px;border:1px solid rgba(0,0,0,0.06);text-decoration:none;color:inherit;background:#fff}
     .primary{background:var(--btn);color:#fff;border:none}
     .secondary{background:linear-gradient(180deg,var(--deep),#fff);border:1px solid var(--accent)}
@@ -36,37 +39,45 @@
       </div>
     </header>
 
-    <section class="links" aria-label="Kit links">
-      <a class="link-btn secondary" id="renderedLink" href="https://greysmokez.github.io/Continuous-Jubilee-Calendar/" target="_blank" rel="noopener">
-        Rendered site (human-friendly)
+    <section class="links box" aria-label="Kit links">
+      <h2>Quick Actions</h2>
+      <a class="link-btn secondary combo-link" href="https://greysmokez.github.io/Continuous-Jubilee-Calendar/" target="_blank" rel="noopener" data-action="copy-open" data-copy="https://greysmokez.github.io/Continuous-Jubilee-Calendar/">
+        Hosted kit page
       </a>
 
-      <a class="link-btn primary" id="rawLink" href="https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit_PasteReady.txt" target="_blank" rel="noopener">
-        Paste-ready (raw .txt) — best for AI
+      <div class="subhead">What is the CJC</div>
+      <a class="link-btn secondary combo-link" href="Chapter1.pdf" target="_blank" rel="noopener" data-action="download-open" data-download="Chapter1.pdf" data-filename="Chapter1.pdf">
+        Chapter 1 — Scriptures Core Calendar Framework (Download + Open)
       </a>
 
-      <a class="link-btn secondary" id="pdfLink" href="https://github.com/Greysmokez/Continuous-Jubilee-Calendar/blob/main/CJC_AI_Research_Kit.pdf" target="_blank" rel="noopener">
-        CJC PDF Version
+      <a class="link-btn primary combo-link" href="https://chat.openai.com/" target="_blank" rel="noopener" data-action="copy-open" data-copy-target="aiPrompt" aria-label="Open AI + Prompt (copies prompt and opens AI in a new tab)">
+        Open AI + Prompt
       </a>
+    </section>
 
-      <a class="link-btn secondary" id="chapter1Link" href="https://greysmokez.github.io/Continuous-Jubilee-Calendar/chapter1.html" target="_blank" rel="noopener">
-        Chapter 1 — Scriptures Core Calendar Framework
+    <section class="links box" aria-label="Supporting Documents">
+      <h2>Supporting Documents</h2>
+      <a class="link-btn secondary combo-link" href="CJC_AI_Research_Kit.pdf" target="_blank" rel="noopener" data-action="download-open" data-download="CJC_AI_Research_Kit.pdf" data-filename="CJC_AI_Research_Kit.pdf">
+        CJC PDF Version — Download + Open
       </a>
-
-      <button class="link-btn" id="copyRaw" title="Copy raw .txt URL">Copy raw URL</button>
-      <button class="link-btn" id="downloadRaw" title="Download paste-ready .txt">Download .txt</button>
+      <a class="link-btn secondary combo-link" href="Crucifixion.pdf" target="_blank" rel="noopener" data-action="download-open" data-download="Crucifixion.pdf" data-filename="Crucifixion.pdf">
+        Crucifixion PDF — Download + Open
+      </a>
+      <a class="link-btn secondary combo-link" href="Crucifixion.docx" target="_blank" rel="noopener" data-action="download-open" data-download="Crucifixion.docx" data-filename="Crucifixion.docx">
+        Crucifixion DOCX — Download + Open
+      </a>
     </section>
 
     <section class="kit-summary" aria-live="polite">
       <strong>Quick guidance (for AI and human users)</strong>
-      <div class="small" style="margin-top:8px">
-        - If your assistant can fetch URLs, use the Paste-ready (raw .txt) link above. It always serves the exact text from the latest commit.<br>
-        - If the assistant cannot fetch URLs, open the Paste-ready link, copy the full text, and paste it into the chat. That guarantees verbatim behavior.<br>
-        - The rendered page is intended for reading and navigation; the raw .txt is authoritative for computation.
-      </div>
+      <ul class="small" style="margin-top:8px;padding-left:18px">
+        <li>Use Hosted kit page to open the reading view and copy its URL in one step.</li>
+        <li>Use Open AI + Prompt to copy the full computation prompt and open AI in one step.</li>
+        <li>Hosted kit page is the reading view; CJCKit.txt remains the authoritative source for computation.</li>
+      </ul>
 
       <div class="prompt" id="aiPrompt">
-"Fetch the exact plain-text content at https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit_PasteReady.txt and treat it as authoritative; do not summarize before computation. Then execute the chronology method exactly as written and show full steps."
+"Fetch the exact plain-text content at https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJCKit.txt and treat it as authoritative; do not summarize before computation. Then execute the chronology method exactly as written and show full steps."
       </div>
     </section>
 
@@ -77,35 +88,72 @@
   </div>
 
   <script>
-    const RAW = 'https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit_PasteReady.txt';
-    document.getElementById('copyRaw').addEventListener('click', async (e) => {
-      try {
-        await navigator.clipboard.writeText(RAW);
-        const el = e.currentTarget;
-        const text = el.textContent;
-        el.textContent = 'Copied';
-        setTimeout(()=> el.textContent = text, 1400);
-      } catch(err) {
-        alert('Copy failed — please copy the link manually: ' + RAW);
-      }
-    });
+    const pulse = (el, text) => {
+      const previous = el.textContent;
+      el.textContent = text;
+      setTimeout(()=> el.textContent = previous, 1400);
+    };
 
-    document.getElementById('downloadRaw').addEventListener('click', async () => {
-      try {
-        const resp = await fetch(RAW);
-        if(!resp.ok) throw new Error('Network response not ok');
-        const blob = await resp.blob();
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'CJC_AI_Research_Kit_PasteReady.txt';
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        URL.revokeObjectURL(url);
-      } catch(err) {
-        window.open(RAW, '_blank');
+    const triggerDownload = ({ downloadUrl, filename }) => {
+      const a = document.createElement('a');
+      a.href = downloadUrl;
+      a.download = filename || 'download';
+      a.rel = 'noopener';
+      a.style.display = 'none';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    };
+
+    const copyText = async ({ text, missingMessage, failedMessage }) => {
+      if(!text) {
+        alert(missingMessage || 'Copy source not found — please copy manually.');
+        return false;
       }
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch(err) {
+        alert(failedMessage || 'Copy failed — please copy manually.');
+        return false;
+      }
+    };
+
+    const runComboAction = async (link, event) => {
+        const action = link.dataset.action;
+
+        if(action === 'copy-open') {
+          const promptEl = link.dataset.copyTarget ? document.getElementById(link.dataset.copyTarget) : null;
+          const copyTextValue = promptEl ? promptEl.textContent.trim() : (link.dataset.copy || '');
+          const isPromptCopy = Boolean(link.dataset.copyTarget);
+          const completed = await copyText({
+            text: copyTextValue,
+            missingMessage: isPromptCopy ? 'Prompt text not found — please copy it from the prompt box.' : 'URL not found — please copy the page link manually.',
+            failedMessage: isPromptCopy ? 'Copy failed — please copy manually from the prompt box.' : 'Copy failed — please copy the page link manually.',
+          });
+          if(!completed) {
+            event.preventDefault();
+            return;
+          }
+          pulse(link, 'Copied + Opened');
+          return;
+        }
+
+        if(action === 'download-open') {
+          const hasModifier = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
+          if(hasModifier) return;
+          triggerDownload({
+            downloadUrl: link.dataset.download,
+            filename: link.dataset.filename || 'download',
+          });
+          pulse(link, 'Downloaded + Opened');
+        }
+    };
+
+    document.querySelectorAll('.combo-link').forEach((link) => {
+      link.addEventListener('click', async (event) => {
+        await runComboAction(link, event);
+      });
     });
   </script>
 </body>
