@@ -88,6 +88,7 @@
 
   <script>
     const RAW = 'https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit_PasteReady.txt';
+    const OPEN_AI = 'https://chat.openai.com/';
     const HOSTED = 'https://greysmokez.github.io/Continuous-Jubilee-Calendar/';
     const CHAPTER1 = 'https://greysmokez.github.io/Continuous-Jubilee-Calendar/chapter1.html';
     const CJC_PDF = 'https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit.pdf';
@@ -103,21 +104,6 @@
       statusEl.textContent = text;
       clearTimeout(statusTimer);
       statusTimer = setTimeout(() => { statusEl.textContent = ''; }, 2200);
-    };
-
-    const openAndDownloadByUrl = (e, url, filename, label) => {
-      e.preventDefault();
-      if(!openNewTab(url)) {
-        window.location.assign(url);
-        return;
-      }
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      setStatus(`${label}: opened + download started`);
     };
 
     const openNewTab = (url) => {
@@ -141,9 +127,7 @@
 
     const downloadAndOpen = async (e, url, filename, label) => {
       e.preventDefault();
-      const opened = window.open('about:blank', '_blank', 'noopener=yes');
-      if(opened) opened.opener = null;
-      if(!opened) {
+      if(!openNewTab(url)) {
         window.location.assign(url);
         return;
       }
@@ -158,11 +142,9 @@
         document.body.appendChild(a);
         a.click();
         a.remove();
-        opened.location.href = downloadUrl;
         setStatus(`${label}: downloaded + opened`);
         setTimeout(() => URL.revokeObjectURL(downloadUrl), 30000);
       } catch(err) {
-        opened.location.href = url;
         setStatus(`${label}: opened`);
       }
     };
@@ -171,7 +153,7 @@
       copyAndOpen(e, HOSTED, HOSTED, 'Hosted kit page');
     });
     document.getElementById('openAiPrompt').addEventListener('click', (e) => {
-      copyAndOpen(e, AI_PROMPT, e.currentTarget.href, 'Open AI + Prompt');
+      copyAndOpen(e, AI_PROMPT, OPEN_AI, 'Open AI + Prompt');
     });
     document.getElementById('chapter1Link').addEventListener('click', (e) => {
       copyAndOpen(e, CHAPTER1, CHAPTER1, 'Chapter 1');
@@ -183,7 +165,7 @@
       downloadAndOpen(e, CRUCIFIXION_PDF, 'Crucifixion.pdf', 'Crucifixion Timeline (PDF)');
     });
     document.getElementById('crucifixionDocxLink').addEventListener('click', (e) => {
-      openAndDownloadByUrl(e, CRUCIFIXION_DOCX, 'Crucifixion.docx', 'Crucifixion Timeline (DOCX)');
+      downloadAndOpen(e, CRUCIFIXION_DOCX, 'Crucifixion.docx', 'Crucifixion Timeline (DOCX)');
     });
   </script>
 </body>
