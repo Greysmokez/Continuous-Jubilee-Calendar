@@ -103,19 +103,27 @@
       setTimeout(() => { el.textContent = original; }, 1400);
     };
 
-    const openNewTab = (url) => window.open(url, '_blank', 'noopener');
+    const openNewTab = (url) => {
+      const opened = window.open('about:blank', '_blank', 'noopener=yes');
+      if(opened) {
+        opened.opener = null;
+        opened.location.href = url;
+      }
+      return opened;
+    };
 
     const copyAndOpen = async (button, textToCopy, openUrl) => {
+      openNewTab(openUrl);
       try {
         await navigator.clipboard.writeText(textToCopy);
         flash(button, 'Copied + Opened');
       } catch(err) {
         flash(button, 'Opened (copy failed)');
       }
-      openNewTab(openUrl);
     };
 
     const downloadAndOpen = async (button, url, filename) => {
+      openNewTab(url);
       try {
         const resp = await fetch(url);
         if(!resp.ok) throw new Error('Network response not ok');
@@ -128,11 +136,9 @@
         a.click();
         a.remove();
         flash(button, 'Downloaded + Opened');
-        openNewTab(url);
-        URL.revokeObjectURL(downloadUrl);
+        setTimeout(() => URL.revokeObjectURL(downloadUrl), 30000);
       } catch(err) {
         flash(button, 'Opened');
-        openNewTab(url);
       }
     };
 
