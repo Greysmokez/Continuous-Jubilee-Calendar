@@ -88,7 +88,7 @@
   <script>
     const OPEN_AI = 'https://chat.openai.com/';
     const HOSTED = 'https://greysmokez.github.io/Continuous-Jubilee-Calendar/';
-    const CHAPTER1 = 'https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/Chapter1.pdf';
+    const CHAPTER1 = 'https://greysmokez.github.io/Continuous-Jubilee-Calendar/chapter1.html';
     const CJC_PDF = 'https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit.pdf';
     const CRUCIFIXION_PDF = 'https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/Crucifixion.pdf';
     const CRUCIFIXION_DOCX = 'https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/Crucifixion.docx';
@@ -123,9 +123,9 @@
         document.body.appendChild(a);
         a.click();
         a.remove();
-        URL.revokeObjectURL(downloadUrl);
         flash(button, 'Downloaded + Opened');
-        openNewTab(url);
+        openNewTab(downloadUrl);
+        setTimeout(() => URL.revokeObjectURL(downloadUrl), 30000);
       } catch(err) {
         flash(button, 'Opened');
         openNewTab(url);
@@ -137,7 +137,7 @@
       const prompt = document.getElementById('aiPrompt').textContent.trim();
       copyAndOpen(e.currentTarget, prompt, OPEN_AI);
     });
-    document.getElementById('chapter1Link').addEventListener('click', (e) => downloadAndOpen(e.currentTarget, CHAPTER1, 'Chapter1.pdf'));
+    document.getElementById('chapter1Link').addEventListener('click', (e) => copyAndOpen(e.currentTarget, CHAPTER1, CHAPTER1));
     document.getElementById('pdfLink').addEventListener('click', (e) => downloadAndOpen(e.currentTarget, CJC_PDF, 'CJC_AI_Research_Kit.pdf'));
     document.getElementById('crucifixionPdfLink').addEventListener('click', (e) => downloadAndOpen(e.currentTarget, CRUCIFIXION_PDF, 'Crucifixion.pdf'));
     document.getElementById('crucifixionDocxLink').addEventListener('click', (e) => downloadAndOpen(e.currentTarget, CRUCIFIXION_DOCX, 'Crucifixion.docx'));
