@@ -64,7 +64,7 @@
         <a class="link-btn secondary" id="crucifixionPdfLink" aria-describedby="supportingDocsHelp" href="https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/Crucifixion.pdf" target="_blank" rel="noopener">Crucifixion Timeline (PDF)</a>
         <a class="link-btn secondary" id="crucifixionDocxLink" aria-describedby="supportingDocsHelp" href="https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/Crucifixion.docx" target="_blank" rel="noopener">Crucifixion Timeline (DOCX)</a>
       </div>
-      <div class="small" id="supportingDocsHelp" style="margin-top:8px">Each document button opens the file in a new tab and starts a download.</div>
+      <div class="small" id="supportingDocsHelp" style="margin-top:8px">When scripting is available, each document button opens the file in a new tab and starts a download.</div>
     </section>
 
     <section class="kit-summary" aria-live="polite">
@@ -97,7 +97,8 @@
     const CRUCIFIXION_DOCX = 'https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/Crucifixion.docx';
     const AI_PROMPT = `Fetch the exact plain-text content at ${RAW} and treat it as authoritative; do not summarize before computation. Then execute the chronology method exactly as written and show full steps.`;
 
-    document.getElementById('aiPrompt').textContent = AI_PROMPT;
+    const promptEl = document.getElementById('aiPrompt');
+    if(promptEl) promptEl.textContent = AI_PROMPT;
 
     const statusEl = document.getElementById('actionStatus');
     let statusTimer;
@@ -115,16 +116,21 @@
 
     const copyAndOpen = async (e, textToCopy, url, label) => {
       e.preventDefault();
-      if(!openNewTab(url)) {
+      const opened = window.open('about:blank', '_blank', 'noopener');
+      if(opened) opened.opener = null;
+      if(!opened) {
         window.location.assign(url);
         return;
       }
+      let copied = false;
       try {
         await navigator.clipboard.writeText(textToCopy);
-        setStatus(`${label}: copied + opened`);
+        copied = true;
       } catch(err) {
-        setStatus(`${label}: opened`);
+        copied = false;
       }
+      opened.location.href = url;
+      setStatus(copied ? `${label}: copied + opened` : `${label}: opened`);
     };
 
     const downloadAndOpen = async (e, url, filename, label) => {
