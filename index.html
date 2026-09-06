@@ -40,20 +40,20 @@
     </header>
 
     <section class="links" aria-label="Kit links">
-      <a class="link-btn secondary" id="hostedLink" aria-describedby="copyOpenHelp" href="https://greysmokez.github.io/Continuous-Jubilee-Calendar/" target="_blank" rel="noopener">
+      <button type="button" class="link-btn secondary" id="hostedLink" aria-describedby="copyOpenHelp">
         Hosted kit page (copy + open)
-      </a>
+      </button>
 
       <section class="button-group" aria-labelledby="whatIsCjcTitle">
         <h2 class="button-group-title" id="whatIsCjcTitle">What is the CJC</h2>
-        <a class="link-btn secondary" id="chapter1Link" aria-describedby="copyOpenHelp" href="https://greysmokez.github.io/Continuous-Jubilee-Calendar/chapter1.html" target="_blank" rel="noopener">
+        <button type="button" class="link-btn secondary" id="chapter1Link" aria-describedby="copyOpenHelp">
           Chapter 1 — Scriptures Core Calendar Framework (copy + open)
-        </a>
+        </button>
       </section>
 
-      <a class="link-btn primary" id="openAiPrompt" aria-describedby="copyOpenHelp" href="https://chat.openai.com/" target="_blank" rel="noopener">
+      <button type="button" class="link-btn primary" id="openAiPrompt" aria-describedby="copyOpenHelp">
         Open AI + Prompt (copy for paste + open)
-      </a>
+      </button>
     </section>
     <div class="small" id="copyOpenHelp" style="margin-top:-6px;margin-bottom:6px">These top buttons copy text to your clipboard and open a destination.</div>
     <div class="small" id="actionStatus" aria-live="polite" style="min-height:1.2em;margin-top:-6px;margin-bottom:12px"></div>
@@ -61,9 +61,9 @@
     <section class="supporting-docs" aria-label="Supporting Documents">
       <strong>Supporting Documents</strong>
       <div class="actions" style="margin-top:10px">
-        <a class="link-btn secondary" id="pdfLink" aria-describedby="supportingDocsHelp" href="https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit.pdf" target="_blank" rel="noopener">CJC PDF Version</a>
-        <a class="link-btn secondary" id="crucifixionPdfLink" aria-describedby="supportingDocsHelp" href="https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/Crucifixion.pdf" target="_blank" rel="noopener">Crucifixion Timeline (PDF)</a>
-        <a class="link-btn secondary" id="crucifixionDocxLink" aria-describedby="supportingDocsHelp" href="https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/Crucifixion.docx" target="_blank" rel="noopener">Crucifixion Timeline (DOCX)</a>
+        <button type="button" class="link-btn secondary" id="pdfLink" aria-describedby="supportingDocsHelp">CJC PDF Version</button>
+        <button type="button" class="link-btn secondary" id="crucifixionPdfLink" aria-describedby="supportingDocsHelp">Crucifixion Timeline (PDF)</button>
+        <button type="button" class="link-btn secondary" id="crucifixionDocxLink" aria-describedby="supportingDocsHelp">Crucifixion Timeline (DOCX)</button>
       </div>
       <div class="small" id="supportingDocsHelp" style="margin-top:8px">When scripting is available, each document button opens the file in a new tab and starts a download.</div>
     </section>
@@ -127,7 +127,7 @@
       if(!openNewTab(url)) {
         window.location.assign(url);
       }
-      setStatus(copied ? `${label}: copied + opened` : `${label}: opened`);
+      setStatus(copied ? `${label}: copied + opened` : `${label}: copy failed; opened`);
     };
 
     const downloadAndOpen = async (e, url, filename, label) => {
@@ -145,11 +145,8 @@
         document.body.appendChild(a);
         a.click();
         a.remove();
-        if(opened) {
-          opened.location.href = downloadUrl;
-        } else {
-          window.location.assign(downloadUrl);
-        }
+        if(opened) opened.location.href = url;
+        else window.location.assign(url);
         setStatus(`${label}: downloaded + opened`);
         setTimeout(() => URL.revokeObjectURL(downloadUrl), 30000);
       } catch(err) {
