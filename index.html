@@ -40,28 +40,28 @@
     </header>
 
     <section class="links" aria-label="Kit links">
-      <button type="button" class="link-btn secondary" id="hostedLink">
+      <a class="link-btn secondary" id="hostedLink" href="https://greysmokez.github.io/Continuous-Jubilee-Calendar/" target="_blank" rel="noopener">
         Hosted kit page
-      </button>
+      </a>
 
       <section class="button-group" aria-labelledby="whatIsCjcTitle">
         <div class="button-group-title" id="whatIsCjcTitle">What is the CJC</div>
-        <button type="button" class="link-btn secondary" id="chapter1Link">
+        <a class="link-btn secondary" id="chapter1Link" href="https://greysmokez.github.io/Continuous-Jubilee-Calendar/chapter1.html" target="_blank" rel="noopener">
           Chapter 1 — Scriptures Core Calendar Framework
-        </button>
+        </a>
       </section>
 
-      <button type="button" class="link-btn primary" id="openAiPrompt">
+      <a class="link-btn primary" id="openAiPrompt" href="https://chat.openai.com/" target="_blank" rel="noopener">
         Open AI + Prompt
-      </button>
+      </a>
     </section>
 
     <section class="supporting-docs" aria-label="Supporting Documents">
       <strong>Supporting Documents</strong>
       <div class="actions" style="margin-top:10px">
-        <button type="button" class="link-btn secondary" id="pdfLink">CJC PDF Version</button>
-        <button type="button" class="link-btn secondary" id="crucifixionPdfLink">Crucifixion Timeline (PDF)</button>
-        <button type="button" class="link-btn secondary" id="crucifixionDocxLink">Crucifixion Timeline (DOCX)</button>
+        <a class="link-btn secondary" id="pdfLink" href="https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit.pdf" target="_blank" rel="noopener">CJC PDF Version</a>
+        <a class="link-btn secondary" id="crucifixionPdfLink" href="https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/Crucifixion.pdf" target="_blank" rel="noopener">Crucifixion Timeline (PDF)</a>
+        <a class="link-btn secondary" id="crucifixionDocxLink" href="https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/Crucifixion.docx" target="_blank" rel="noopener">Crucifixion Timeline (DOCX)</a>
       </div>
     </section>
 
@@ -75,7 +75,7 @@
       </div>
 
       <div class="prompt" id="aiPrompt">
-"Fetch the exact plain-text content at https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJCKit.txt and treat it as authoritative; do not summarize before computation. Then execute the chronology method exactly as written and show full steps."
+"Fetch the exact plain-text content at https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit_PasteReady.txt and treat it as authoritative; do not summarize before computation. Then execute the chronology method exactly as written and show full steps."
       </div>
     </section>
 
@@ -86,7 +86,7 @@
   </div>
 
   <script>
-    const RAW = 'https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJCKit.txt';
+    const RAW = 'https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit_PasteReady.txt';
     const OPEN_AI = 'https://chat.openai.com/';
     const HOSTED = 'https://greysmokez.github.io/Continuous-Jubilee-Calendar/';
     const CHAPTER1 = 'https://greysmokez.github.io/Continuous-Jubilee-Calendar/chapter1.html';
@@ -142,14 +142,30 @@
       }
     };
 
-    document.getElementById('hostedLink').addEventListener('click', (e) => copyAndOpen(e.currentTarget, HOSTED, HOSTED));
+    document.getElementById('hostedLink').addEventListener('click', (e) => {
+      e.preventDefault();
+      copyAndOpen(e.currentTarget, HOSTED, HOSTED);
+    });
     document.getElementById('openAiPrompt').addEventListener('click', (e) => {
+      e.preventDefault();
       copyAndOpen(e.currentTarget, AI_PROMPT, OPEN_AI);
     });
-    document.getElementById('chapter1Link').addEventListener('click', (e) => copyAndOpen(e.currentTarget, CHAPTER1, CHAPTER1));
-    document.getElementById('pdfLink').addEventListener('click', (e) => downloadAndOpen(e.currentTarget, CJC_PDF, 'CJC_AI_Research_Kit.pdf'));
-    document.getElementById('crucifixionPdfLink').addEventListener('click', (e) => downloadAndOpen(e.currentTarget, CRUCIFIXION_PDF, 'Crucifixion.pdf'));
-    document.getElementById('crucifixionDocxLink').addEventListener('click', (e) => downloadAndOpen(e.currentTarget, CRUCIFIXION_DOCX, 'Crucifixion.docx'));
+    document.getElementById('chapter1Link').addEventListener('click', (e) => {
+      e.preventDefault();
+      copyAndOpen(e.currentTarget, CHAPTER1, CHAPTER1);
+    });
+    document.getElementById('pdfLink').addEventListener('click', (e) => {
+      e.preventDefault();
+      downloadAndOpen(e.currentTarget, CJC_PDF, 'CJC_AI_Research_Kit.pdf');
+    });
+    document.getElementById('crucifixionPdfLink').addEventListener('click', (e) => {
+      e.preventDefault();
+      downloadAndOpen(e.currentTarget, CRUCIFIXION_PDF, 'Crucifixion.pdf');
+    });
+    document.getElementById('crucifixionDocxLink').addEventListener('click', (e) => {
+      e.preventDefault();
+      downloadAndOpen(e.currentTarget, CRUCIFIXION_DOCX, 'Crucifixion.docx');
+    });
   </script>
 </body>
 </html>
