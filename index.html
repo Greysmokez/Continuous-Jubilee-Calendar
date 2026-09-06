@@ -87,7 +87,6 @@
 
   <script>
     const RAW = 'https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit_PasteReady.txt';
-    const OPEN_AI = 'https://chat.openai.com/';
     const HOSTED = 'https://greysmokez.github.io/Continuous-Jubilee-Calendar/';
     const CHAPTER1 = 'https://greysmokez.github.io/Continuous-Jubilee-Calendar/chapter1.html';
     const CJC_PDF = 'https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit.pdf';
@@ -103,27 +102,16 @@
       setTimeout(() => { el.textContent = original; }, 1400);
     };
 
-    const openNewTab = (url) => {
-      const opened = window.open('about:blank', '_blank', 'noopener=yes');
-      if(opened) {
-        opened.opener = null;
-        opened.location.href = url;
-      }
-      return opened;
-    };
-
-    const copyAndOpen = async (button, textToCopy, openUrl) => {
-      openNewTab(openUrl);
+    const copyAndOpen = async (button, textToCopy) => {
       try {
         await navigator.clipboard.writeText(textToCopy);
         flash(button, 'Copied + Opened');
       } catch(err) {
-        flash(button, 'Opened (copy failed)');
+        flash(button, 'Opened');
       }
     };
 
     const downloadAndOpen = async (button, url, filename) => {
-      openNewTab(url);
       try {
         const resp = await fetch(url);
         if(!resp.ok) throw new Error('Network response not ok');
@@ -143,27 +131,21 @@
     };
 
     document.getElementById('hostedLink').addEventListener('click', (e) => {
-      e.preventDefault();
-      copyAndOpen(e.currentTarget, HOSTED, HOSTED);
+      copyAndOpen(e.currentTarget, HOSTED);
     });
     document.getElementById('openAiPrompt').addEventListener('click', (e) => {
-      e.preventDefault();
-      copyAndOpen(e.currentTarget, AI_PROMPT, OPEN_AI);
+      copyAndOpen(e.currentTarget, AI_PROMPT);
     });
     document.getElementById('chapter1Link').addEventListener('click', (e) => {
-      e.preventDefault();
-      copyAndOpen(e.currentTarget, CHAPTER1, CHAPTER1);
+      copyAndOpen(e.currentTarget, CHAPTER1);
     });
     document.getElementById('pdfLink').addEventListener('click', (e) => {
-      e.preventDefault();
       downloadAndOpen(e.currentTarget, CJC_PDF, 'CJC_AI_Research_Kit.pdf');
     });
     document.getElementById('crucifixionPdfLink').addEventListener('click', (e) => {
-      e.preventDefault();
       downloadAndOpen(e.currentTarget, CRUCIFIXION_PDF, 'Crucifixion.pdf');
     });
     document.getElementById('crucifixionDocxLink').addEventListener('click', (e) => {
-      e.preventDefault();
       downloadAndOpen(e.currentTarget, CRUCIFIXION_DOCX, 'Crucifixion.docx');
     });
   </script>
