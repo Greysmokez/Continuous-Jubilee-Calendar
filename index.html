@@ -26,6 +26,9 @@
     footer{margin-top:36px;color:var(--muted);font-size:0.9rem;border-top:1px dashed #E7DDBF;padding-top:18px}
     .small{font-size:0.92rem;color:var(--muted)}
     .actions{display:flex;gap:10px;flex-wrap:wrap}
+    .hint-text{margin:0 0 6px}
+    .status-text{min-height:1.2em;margin:0 0 12px}
+    .noscript-links{margin-bottom:12px}
     @media (max-width:640px){.wrap{padding:20px}}
   </style>
 </head>
@@ -55,13 +58,13 @@
         Open AI + Prompt (copy for paste + open)
       </button>
     </section>
-    <div class="small" id="copyOpenHelp" style="margin-top:-6px;margin-bottom:6px">These top buttons copy text to your clipboard and open a destination.</div>
-    <div class="small" id="actionStatus" aria-live="polite" style="min-height:1.2em;margin-top:-6px;margin-bottom:12px"></div>
+    <div class="small hint-text" id="copyOpenHelp">These top buttons copy text to your clipboard and open a destination.</div>
+    <div class="small status-text" id="actionStatus" aria-live="polite"></div>
     <noscript>
-      <div class="small" style="margin-bottom:12px">
+      <div class="small noscript-links">
         JavaScript is disabled. Use direct links: <a href="https://greysmokez.github.io/Continuous-Jubilee-Calendar/" target="_blank" rel="noopener">Hosted kit page</a>,
         <a href="https://greysmokez.github.io/Continuous-Jubilee-Calendar/chapter1.html" target="_blank" rel="noopener">Chapter 1</a>,
-        <a href="https://chat.openai.com/" target="_blank" rel="noopener">Open AI</a>,
+        <a href="https://chatgpt.com/" target="_blank" rel="noopener">Open AI</a>,
         <a href="https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit.pdf" target="_blank" rel="noopener">CJC PDF</a>,
         <a href="https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/Crucifixion.pdf" target="_blank" rel="noopener">Crucifixion PDF</a>,
         <a href="https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/Crucifixion.docx" target="_blank" rel="noopener">Crucifixion DOCX</a>.
@@ -100,7 +103,7 @@
 
   <script>
     const RAW = 'https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit_PasteReady.txt';
-    const OPEN_AI = 'https://chat.openai.com/';
+    const OPEN_AI = 'https://chatgpt.com/';
     const HOSTED = 'https://greysmokez.github.io/Continuous-Jubilee-Calendar/';
     const CHAPTER1 = 'https://greysmokez.github.io/Continuous-Jubilee-Calendar/chapter1.html';
     const CJC_PDF = 'https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit.pdf';
