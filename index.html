@@ -52,7 +52,7 @@
       </section>
 
       <a class="link-btn primary" id="openAiPrompt" href="https://chat.openai.com/" target="_blank" rel="noopener">
-        Open AI + Prompt (copy + open)
+        Open AI + Prompt (copy for paste + open)
       </a>
     </section>
     <div class="small" id="actionStatus" aria-live="polite" style="min-height:1.2em;margin-top:-6px;margin-bottom:12px"></div>
@@ -60,16 +60,17 @@
     <section class="supporting-docs" aria-label="Supporting Documents">
       <strong>Supporting Documents</strong>
       <div class="actions" style="margin-top:10px">
-        <a class="link-btn secondary" id="pdfLink" href="https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit.pdf" target="_blank" rel="noopener">CJC PDF Version</a>
-        <a class="link-btn secondary" id="crucifixionPdfLink" href="https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/Crucifixion.pdf" target="_blank" rel="noopener">Crucifixion Timeline (PDF)</a>
-        <a class="link-btn secondary" id="crucifixionDocxLink" href="https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/Crucifixion.docx" target="_blank" rel="noopener">Crucifixion Timeline (DOCX)</a>
+        <a class="link-btn secondary" id="pdfLink" aria-describedby="supportingDocsHelp" href="https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit.pdf" target="_blank" rel="noopener">CJC PDF Version</a>
+        <a class="link-btn secondary" id="crucifixionPdfLink" aria-describedby="supportingDocsHelp" href="https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/Crucifixion.pdf" target="_blank" rel="noopener">Crucifixion Timeline (PDF)</a>
+        <a class="link-btn secondary" id="crucifixionDocxLink" aria-describedby="supportingDocsHelp" href="https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/Crucifixion.docx" target="_blank" rel="noopener">Crucifixion Timeline (DOCX)</a>
       </div>
+      <div class="small" id="supportingDocsHelp" style="margin-top:8px">Each document button opens the file in a new tab and starts a download.</div>
     </section>
 
     <section class="kit-summary" aria-live="polite">
       <strong>Quick guidance (for AI and human users)</strong>
       <div class="small" style="margin-top:8px">
-        - Use Open AI + Prompt to copy the full CJC prompt and launch AI in one step.<br>
+        - Use Open AI + Prompt to copy the full CJC prompt and launch AI in one step (then paste in chat).<br>
         - If your assistant can fetch URLs, use the prompt's raw .txt source. It always serves the exact text from the latest commit.<br>
         - If the assistant cannot fetch URLs, open the raw .txt URL in the prompt, copy the full text, and paste it into the chat. That guarantees verbatim behavior.<br>
         - The rendered page is intended for reading and navigation; the raw .txt is authoritative for computation.
@@ -107,7 +108,7 @@
     };
 
     const openNewTab = (url) => {
-      const opened = window.open(url, '_blank', 'noopener=yes');
+      const opened = window.open(url, '_blank', 'noopener');
       if(opened) opened.opener = null;
       return opened;
     };
@@ -116,6 +117,7 @@
       e.preventDefault();
       if(!openNewTab(url)) {
         window.location.assign(url);
+        return;
       }
       try {
         await navigator.clipboard.writeText(textToCopy);
