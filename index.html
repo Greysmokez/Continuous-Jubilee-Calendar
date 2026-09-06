@@ -15,6 +15,9 @@
     h1{margin:0;font-family:Spectral,serif;font-size:1.8rem}
     p.lead{margin:6px 0 18px;color:var(--muted)}
     .links{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0}
+    .box{background:#fffef8;border:1px solid #E7DDBF;padding:14px;border-radius:6px}
+    .box h2{margin:0 0 10px;font-family:Spectral,serif;font-size:1.25rem}
+    .subhead{margin:6px 0 4px;font-weight:700;color:var(--muted)}
     .link-btn{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:6px;border:1px solid rgba(0,0,0,0.06);text-decoration:none;color:inherit;background:#fff}
     .primary{background:var(--btn);color:#fff;border:none}
     .secondary{background:linear-gradient(180deg,var(--deep),#fff);border:1px solid var(--accent)}
@@ -36,37 +39,44 @@
       </div>
     </header>
 
-    <section class="links" aria-label="Kit links">
-      <a class="link-btn secondary" id="renderedLink" href="https://greysmokez.github.io/Continuous-Jubilee-Calendar/" target="_blank" rel="noopener">
-        Rendered site (human-friendly)
-      </a>
+    <section class="links box" aria-label="Kit links">
+      <button class="link-btn secondary combo-btn" data-action="download-open" data-download="https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJCKit.txt" data-filename="CJCKit.txt" data-open="https://greysmokez.github.io/Continuous-Jubilee-Calendar/">
+        Hosted kit page
+      </button>
 
-      <a class="link-btn primary" id="rawLink" href="https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit_PasteReady.txt" target="_blank" rel="noopener">
-        Paste-ready (raw .txt) — best for AI
-      </a>
-
-      <a class="link-btn secondary" id="pdfLink" href="https://github.com/Greysmokez/Continuous-Jubilee-Calendar/blob/main/CJC_AI_Research_Kit.pdf" target="_blank" rel="noopener">
-        CJC PDF Version
-      </a>
-
-      <a class="link-btn secondary" id="chapter1Link" href="https://greysmokez.github.io/Continuous-Jubilee-Calendar/chapter1.html" target="_blank" rel="noopener">
+      <div class="subhead">What is the CJC</div>
+      <button class="link-btn secondary combo-btn" data-action="download-open" data-download="Chapter1.pdf" data-filename="Chapter1.pdf" data-open="chapter1.html">
         Chapter 1 — Scriptures Core Calendar Framework
-      </a>
+      </button>
 
-      <button class="link-btn" id="copyRaw" title="Copy raw .txt URL">Copy raw URL</button>
-      <button class="link-btn" id="downloadRaw" title="Download paste-ready .txt">Download .txt</button>
+      <button class="link-btn primary combo-btn" data-action="copy-open" data-copy-target="aiPrompt" data-open="https://chat.openai.com/">
+        Open AI + Prompt
+      </button>
+    </section>
+
+    <section class="links box" aria-label="Supporting Documents">
+      <h2>Supporting Documents</h2>
+      <button class="link-btn secondary combo-btn" data-action="download-open" data-download="CJC_AI_Research_Kit.pdf" data-filename="CJC_AI_Research_Kit.pdf" data-open="CJC_AI_Research_Kit.pdf">
+        CJC PDF Version
+      </button>
+      <button class="link-btn secondary combo-btn" data-action="download-open" data-download="Crucifixion.pdf" data-filename="Crucifixion.pdf" data-open="Crucifixion.pdf">
+        Crucifixion PDF
+      </button>
+      <button class="link-btn secondary combo-btn" data-action="download-open" data-download="Crucifixion.docx" data-filename="Crucifixion.docx" data-open="Crucifixion.docx">
+        Crucifixion DOCX
+      </button>
     </section>
 
     <section class="kit-summary" aria-live="polite">
       <strong>Quick guidance (for AI and human users)</strong>
       <div class="small" style="margin-top:8px">
-        - If your assistant can fetch URLs, use the Paste-ready (raw .txt) link above. It always serves the exact text from the latest commit.<br>
-        - If the assistant cannot fetch URLs, open the Paste-ready link, copy the full text, and paste it into the chat. That guarantees verbatim behavior.<br>
+        - If your assistant can fetch URLs, use the hosted or downloaded raw .txt kit above. It always serves the exact text from the latest commit.<br>
+        - If the assistant cannot fetch URLs, open the raw .txt, copy the full text, and paste it into the chat. That guarantees verbatim behavior.<br>
         - The rendered page is intended for reading and navigation; the raw .txt is authoritative for computation.
       </div>
 
       <div class="prompt" id="aiPrompt">
-"Fetch the exact plain-text content at https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit_PasteReady.txt and treat it as authoritative; do not summarize before computation. Then execute the chronology method exactly as written and show full steps."
+"Fetch the exact plain-text content at https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJCKit.txt and treat it as authoritative; do not summarize before computation. Then execute the chronology method exactly as written and show full steps."
       </div>
     </section>
 
@@ -77,35 +87,63 @@
   </div>
 
   <script>
-    const RAW = 'https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit_PasteReady.txt';
-    document.getElementById('copyRaw').addEventListener('click', async (e) => {
-      try {
-        await navigator.clipboard.writeText(RAW);
-        const el = e.currentTarget;
-        const text = el.textContent;
-        el.textContent = 'Copied';
-        setTimeout(()=> el.textContent = text, 1400);
-      } catch(err) {
-        alert('Copy failed — please copy the link manually: ' + RAW);
-      }
-    });
+    const fallbackOpen = (url) => window.open(url, '_blank', 'noopener');
+    const pulse = (button, text) => {
+      const previous = button.textContent;
+      button.textContent = text;
+      setTimeout(()=> button.textContent = previous, 1400);
+    };
 
-    document.getElementById('downloadRaw').addEventListener('click', async () => {
+    const downloadAndOpen = async ({ downloadUrl, filename, openUrl }) => {
       try {
-        const resp = await fetch(RAW);
+        const resp = await fetch(downloadUrl);
         if(!resp.ok) throw new Error('Network response not ok');
         const blob = await resp.blob();
-        const url = URL.createObjectURL(blob);
+        const objectUrl = URL.createObjectURL(blob);
         const a = document.createElement('a');
-        a.href = url;
-        a.download = 'CJC_AI_Research_Kit_PasteReady.txt';
+        a.href = objectUrl;
+        a.download = filename;
         document.body.appendChild(a);
         a.click();
         a.remove();
-        URL.revokeObjectURL(url);
+        URL.revokeObjectURL(objectUrl);
       } catch(err) {
-        window.open(RAW, '_blank');
+        fallbackOpen(downloadUrl);
+      } finally {
+        fallbackOpen(openUrl);
       }
+    };
+
+    const copyAndOpen = async ({ text, openUrl }) => {
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch(err) {
+        alert('Copy failed — please copy manually from the prompt box.');
+      } finally {
+        fallbackOpen(openUrl);
+      }
+    };
+
+    document.querySelectorAll('.combo-btn').forEach((button) => {
+      button.addEventListener('click', async () => {
+        const action = button.dataset.action;
+
+        if(action === 'copy-open') {
+          const promptEl = document.getElementById(button.dataset.copyTarget);
+          await copyAndOpen({ text: promptEl ? promptEl.textContent.trim() : '', openUrl: button.dataset.open });
+          pulse(button, 'Copied + Opened');
+          return;
+        }
+
+        if(action === 'download-open') {
+          await downloadAndOpen({
+            downloadUrl: button.dataset.download,
+            filename: button.dataset.filename || 'download',
+            openUrl: button.dataset.open || button.dataset.download
+          });
+          pulse(button, 'Downloaded + Opened');
+        }
+      });
     });
   </script>
 </body>
