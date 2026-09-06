@@ -15,10 +15,13 @@
     h1{margin:0;font-family:Spectral,serif;font-size:1.8rem}
     p.lead{margin:6px 0 18px;color:var(--muted)}
     .links{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0}
-    .link-btn{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:6px;border:1px solid rgba(0,0,0,0.06);text-decoration:none;color:inherit;background:#fff}
+    .link-btn{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:6px;border:1px solid rgba(0,0,0,0.06);text-decoration:none;color:inherit;background:#fff;cursor:pointer;font:inherit}
     .primary{background:var(--btn);color:#fff;border:none}
     .secondary{background:linear-gradient(180deg,var(--deep),#fff);border:1px solid var(--accent)}
     .kit-summary{background:#fffef8;border:1px solid #E7DDBF;padding:14px;border-radius:6px;color:var(--muted)}
+    .supporting-docs{background:#fffef8;border:1px solid #E7DDBF;padding:14px;border-radius:6px;color:var(--muted);margin-bottom:18px}
+    .button-group{display:flex;flex-direction:column;gap:8px}
+    .button-group-title{font-family:Spectral,serif;color:var(--ink)}
     .prompt{font-family:monospace;background:#fff;padding:10px;border-radius:6px;border:1px solid #eee;display:block;white-space:pre-wrap;margin-top:10px}
     footer{margin-top:36px;color:var(--muted);font-size:0.9rem;border-top:1px dashed #E7DDBF;padding-top:18px}
     .small{font-size:0.92rem;color:var(--muted)}
@@ -37,36 +40,42 @@
     </header>
 
     <section class="links" aria-label="Kit links">
-      <a class="link-btn secondary" id="renderedLink" href="https://greysmokez.github.io/Continuous-Jubilee-Calendar/" target="_blank" rel="noopener">
-        Rendered site (human-friendly)
-      </a>
+      <button type="button" class="link-btn secondary" id="hostedLink">
+        Hosted kit page
+      </button>
 
-      <a class="link-btn primary" id="rawLink" href="https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit_PasteReady.txt" target="_blank" rel="noopener">
-        Paste-ready (raw .txt) — best for AI
-      </a>
+      <div class="button-group" aria-label="What is the CJC">
+        <div class="button-group-title">What is the CJC</div>
+        <button type="button" class="link-btn secondary" id="chapter1Link">
+          Chapter 1 — Scriptures Core Calendar Framework
+        </button>
+      </div>
 
-      <a class="link-btn secondary" id="pdfLink" href="https://github.com/Greysmokez/Continuous-Jubilee-Calendar/blob/main/CJC_AI_Research_Kit.pdf" target="_blank" rel="noopener">
-        CJC PDF Version
-      </a>
+      <button type="button" class="link-btn primary" id="openAiPrompt">
+        Open AI + Prompt
+      </button>
+    </section>
 
-      <a class="link-btn secondary" id="chapter1Link" href="https://greysmokez.github.io/Continuous-Jubilee-Calendar/chapter1.html" target="_blank" rel="noopener">
-        Chapter 1 — Scriptures Core Calendar Framework
-      </a>
-
-      <button class="link-btn" id="copyRaw" title="Copy raw .txt URL">Copy raw URL</button>
-      <button class="link-btn" id="downloadRaw" title="Download paste-ready .txt">Download .txt</button>
+    <section class="supporting-docs" aria-label="Supporting Documents">
+      <strong>Supporting Documents</strong>
+      <div class="actions" style="margin-top:10px">
+        <button type="button" class="link-btn secondary" id="pdfLink">CJC PDF Version</button>
+        <button type="button" class="link-btn secondary" id="crucifixionPdfLink">Crucifixion Timeline (PDF)</button>
+        <button type="button" class="link-btn secondary" id="crucifixionDocxLink">Crucifixion Timeline (DOCX)</button>
+      </div>
     </section>
 
     <section class="kit-summary" aria-live="polite">
       <strong>Quick guidance (for AI and human users)</strong>
       <div class="small" style="margin-top:8px">
-        - If your assistant can fetch URLs, use the Paste-ready (raw .txt) link above. It always serves the exact text from the latest commit.<br>
-        - If the assistant cannot fetch URLs, open the Paste-ready link, copy the full text, and paste it into the chat. That guarantees verbatim behavior.<br>
+        - Use Open AI + Prompt to copy the full CJC prompt and launch AI in one step.<br>
+        - If your assistant can fetch URLs, use the prompt's raw .txt source. It always serves the exact text from the latest commit.<br>
+        - If the assistant cannot fetch URLs, open the raw .txt URL in the prompt, copy the full text, and paste it into the chat. That guarantees verbatim behavior.<br>
         - The rendered page is intended for reading and navigation; the raw .txt is authoritative for computation.
       </div>
 
       <div class="prompt" id="aiPrompt">
-"Fetch the exact plain-text content at https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit_PasteReady.txt and treat it as authoritative; do not summarize before computation. Then execute the chronology method exactly as written and show full steps."
+"Fetch the exact plain-text content at https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJCKit.txt and treat it as authoritative; do not summarize before computation. Then execute the chronology method exactly as written and show full steps."
       </div>
     </section>
 
@@ -77,36 +86,61 @@
   </div>
 
   <script>
-    const RAW = 'https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit_PasteReady.txt';
-    document.getElementById('copyRaw').addEventListener('click', async (e) => {
-      try {
-        await navigator.clipboard.writeText(RAW);
-        const el = e.currentTarget;
-        const text = el.textContent;
-        el.textContent = 'Copied';
-        setTimeout(()=> el.textContent = text, 1400);
-      } catch(err) {
-        alert('Copy failed — please copy the link manually: ' + RAW);
-      }
-    });
+    const OPEN_AI = 'https://chat.openai.com/';
+    const HOSTED = 'https://greysmokez.github.io/Continuous-Jubilee-Calendar/';
+    const CHAPTER1 = 'https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/Chapter1.pdf';
+    const CJC_PDF = 'https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit.pdf';
+    const CRUCIFIXION_PDF = 'https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/Crucifixion.pdf';
+    const CRUCIFIXION_DOCX = 'https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/Crucifixion.docx';
 
-    document.getElementById('downloadRaw').addEventListener('click', async () => {
+    const flash = (el, text) => {
+      const original = el.textContent;
+      el.textContent = text;
+      setTimeout(() => { el.textContent = original; }, 1400);
+    };
+
+    const openNewTab = (url) => window.open(url, '_blank', 'noopener');
+
+    const copyAndOpen = async (button, textToCopy, openUrl) => {
       try {
-        const resp = await fetch(RAW);
+        await navigator.clipboard.writeText(textToCopy);
+        flash(button, 'Copied + Opened');
+      } catch(err) {
+        flash(button, 'Opened (copy failed)');
+      }
+      openNewTab(openUrl);
+    };
+
+    const downloadAndOpen = async (button, url, filename) => {
+      try {
+        const resp = await fetch(url);
         if(!resp.ok) throw new Error('Network response not ok');
         const blob = await resp.blob();
-        const url = URL.createObjectURL(blob);
+        const downloadUrl = URL.createObjectURL(blob);
         const a = document.createElement('a');
-        a.href = url;
-        a.download = 'CJC_AI_Research_Kit_PasteReady.txt';
+        a.href = downloadUrl;
+        a.download = filename;
         document.body.appendChild(a);
         a.click();
         a.remove();
-        URL.revokeObjectURL(url);
+        URL.revokeObjectURL(downloadUrl);
+        flash(button, 'Downloaded + Opened');
+        openNewTab(url);
       } catch(err) {
-        window.open(RAW, '_blank');
+        flash(button, 'Opened');
+        openNewTab(url);
       }
+    };
+
+    document.getElementById('hostedLink').addEventListener('click', (e) => copyAndOpen(e.currentTarget, HOSTED, HOSTED));
+    document.getElementById('openAiPrompt').addEventListener('click', (e) => {
+      const prompt = document.getElementById('aiPrompt').textContent.trim();
+      copyAndOpen(e.currentTarget, prompt, OPEN_AI);
     });
+    document.getElementById('chapter1Link').addEventListener('click', (e) => downloadAndOpen(e.currentTarget, CHAPTER1, 'Chapter1.pdf'));
+    document.getElementById('pdfLink').addEventListener('click', (e) => downloadAndOpen(e.currentTarget, CJC_PDF, 'CJC_AI_Research_Kit.pdf'));
+    document.getElementById('crucifixionPdfLink').addEventListener('click', (e) => downloadAndOpen(e.currentTarget, CRUCIFIXION_PDF, 'Crucifixion.pdf'));
+    document.getElementById('crucifixionDocxLink').addEventListener('click', (e) => downloadAndOpen(e.currentTarget, CRUCIFIXION_DOCX, 'Crucifixion.docx'));
   </script>
 </body>
 </html>
