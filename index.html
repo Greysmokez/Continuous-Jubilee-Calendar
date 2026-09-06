@@ -44,12 +44,12 @@
         Hosted kit page
       </button>
 
-      <div class="button-group" aria-label="What is the CJC">
-        <div class="button-group-title">What is the CJC</div>
+      <section class="button-group" aria-labelledby="whatIsCjcTitle">
+        <div class="button-group-title" id="whatIsCjcTitle">What is the CJC</div>
         <button type="button" class="link-btn secondary" id="chapter1Link">
           Chapter 1 — Scriptures Core Calendar Framework
         </button>
-      </div>
+      </section>
 
       <button type="button" class="link-btn primary" id="openAiPrompt">
         Open AI + Prompt
@@ -86,12 +86,16 @@
   </div>
 
   <script>
+    const RAW = 'https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJCKit.txt';
     const OPEN_AI = 'https://chat.openai.com/';
     const HOSTED = 'https://greysmokez.github.io/Continuous-Jubilee-Calendar/';
     const CHAPTER1 = 'https://greysmokez.github.io/Continuous-Jubilee-Calendar/chapter1.html';
     const CJC_PDF = 'https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit.pdf';
     const CRUCIFIXION_PDF = 'https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/Crucifixion.pdf';
     const CRUCIFIXION_DOCX = 'https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/Crucifixion.docx';
+    const AI_PROMPT = `"Fetch the exact plain-text content at ${RAW} and treat it as authoritative; do not summarize before computation. Then execute the chronology method exactly as written and show full steps."`;
+
+    document.getElementById('aiPrompt').textContent = AI_PROMPT;
 
     const flash = (el, text) => {
       const original = el.textContent;
@@ -124,8 +128,8 @@
         a.click();
         a.remove();
         flash(button, 'Downloaded + Opened');
-        openNewTab(downloadUrl);
-        setTimeout(() => URL.revokeObjectURL(downloadUrl), 30000);
+        openNewTab(url);
+        URL.revokeObjectURL(downloadUrl);
       } catch(err) {
         flash(button, 'Opened');
         openNewTab(url);
@@ -134,8 +138,7 @@
 
     document.getElementById('hostedLink').addEventListener('click', (e) => copyAndOpen(e.currentTarget, HOSTED, HOSTED));
     document.getElementById('openAiPrompt').addEventListener('click', (e) => {
-      const prompt = document.getElementById('aiPrompt').textContent.trim();
-      copyAndOpen(e.currentTarget, prompt, OPEN_AI);
+      copyAndOpen(e.currentTarget, AI_PROMPT, OPEN_AI);
     });
     document.getElementById('chapter1Link').addEventListener('click', (e) => copyAndOpen(e.currentTarget, CHAPTER1, CHAPTER1));
     document.getElementById('pdfLink').addEventListener('click', (e) => downloadAndOpen(e.currentTarget, CJC_PDF, 'CJC_AI_Research_Kit.pdf'));
