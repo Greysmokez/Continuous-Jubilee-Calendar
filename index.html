@@ -41,8 +41,8 @@
         Rendered site (human-friendly)
       </a>
 
-      <a class="link-btn primary" id="rawLink" href="https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit_PasteReady.txt" target="_blank" rel="noopener">
-        Paste-ready (raw .txt) — best for AI
+      <a class="link-btn primary" id="rawLink" href="https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJCKit.txt" target="_blank" rel="noopener">
+        Canonical raw text (CJCKit.txt) — best for AI
       </a>
 
       <a class="link-btn secondary" id="pdfLink" href="https://github.com/Greysmokez/Continuous-Jubilee-Calendar/blob/main/CJC_AI_Research_Kit.pdf" target="_blank" rel="noopener">
@@ -54,19 +54,19 @@
       </a>
 
       <button class="link-btn" id="copyRaw" title="Copy raw .txt URL">Copy raw URL</button>
-      <button class="link-btn" id="downloadRaw" title="Download paste-ready .txt">Download .txt</button>
+      <button class="link-btn" id="downloadRaw" title="Download canonical CJCKit.txt">Download .txt</button>
     </section>
 
     <section class="kit-summary" aria-live="polite">
       <strong>Quick guidance (for AI and human users)</strong>
       <div class="small" style="margin-top:8px">
-        - If your assistant can fetch URLs, use the Paste-ready (raw .txt) link above. It always serves the exact text from the latest commit.<br>
-        - If the assistant cannot fetch URLs, open the Paste-ready link, copy the full text, and paste it into the chat. That guarantees verbatim behavior.<br>
+        - If your assistant can fetch URLs, use the Canonical raw text (CJCKit.txt) link above. It always serves the exact text from the latest commit.<br>
+        - If the assistant cannot fetch URLs, open the Canonical raw text link, copy the full text, and paste it into the chat. That guarantees verbatim behavior.<br>
         - The rendered page is intended for reading and navigation; the raw .txt is authoritative for computation.
       </div>
 
       <div class="prompt" id="aiPrompt">
-"Fetch the exact plain-text content at https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit_PasteReady.txt and treat it as authoritative; do not summarize before computation. Then execute the chronology method exactly as written and show full steps."
+"Fetch the exact plain-text content at https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJCKit.txt and treat it as authoritative; do not summarize before computation. Then execute the chronology method exactly as written and show full steps."
       </div>
     </section>
 
@@ -77,7 +77,7 @@
   </div>
 
   <script>
-    const RAW = 'https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJC_AI_Research_Kit_PasteReady.txt';
+    const RAW = 'https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJCKit.txt';
     document.getElementById('copyRaw').addEventListener('click', async (e) => {
       try {
         await navigator.clipboard.writeText(RAW);
@@ -98,7 +98,7 @@
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'CJC_AI_Research_Kit_PasteReady.txt';
+        a.download = 'CJCKit.txt';
         document.body.appendChild(a);
         a.click();
         a.remove();
