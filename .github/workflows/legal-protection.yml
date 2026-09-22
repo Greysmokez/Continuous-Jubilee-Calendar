@@ -21,14 +21,17 @@ on:
       - "legal/legal-notice.txt"
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   protect-assets:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -46,3 +49,32 @@ jobs:
         with:
           name: protected-assets
           path: protected-assets
+
+      - name: Commit and push protected assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add --all -- protected-assets/
+
+          if git diff --cached --quiet; then
+            echo "No protected asset changes to commit."
+            exit 0
+          fi
+
+          git commit -m "Update protected assets [skip ci]"
+
+          for attempt in 1 2 3; do
+            if git pull --rebase origin main && git push origin HEAD:main; then
+              echo "Pushed protected-assets update."
+              exit 0
+            fi
+
+            if [ "$attempt" -eq 3 ]; then
+              echo "::error::Unable to push protected-assets update after 3 attempts due to concurrent changes on main. Please re-run the workflow."
+              exit 1
+            fi
+
+            echo "Push race detected, retrying (attempt $((attempt + 1))/3)..."
+            sleep $((attempt * 2))
+          done
