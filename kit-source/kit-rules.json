@@ -1,13 +1,39 @@
 {
   "_about": "Consistency rules checked on every build. If a rule fails, the build stops and nothing is published, so an out-of-date kit can never go live. Add a rule whenever a claim is settled or a phrase is retired.",
   "must_include": [
-    {"text": "RIC 225", "why": "Tiberius coregency coin evidence (Luke 3:1 -> AD 27)"},
-    {"text": "The Two Uses of \"the Abomination of Desolation\"", "why": "Two-use abomination section"},
-    {"text": "AD 30, which computes to Y = 46 (Position 4)", "why": "AD 30 is the phase anchor (epoch)"}
+    {
+      "text": "RIC 225",
+      "why": "Tiberius coregency coin evidence (Luke 3:1 -> AD 27)"
+    },
+    {
+      "text": "The Two Uses of \"the Abomination of Desolation\"",
+      "why": "Two-use abomination section"
+    },
+    {
+      "text": "AD 30, which computes to Y = 46 (Position 4)",
+      "why": "AD 30 is the phase anchor (epoch)"
+    },
+    {
+      "text": "Tyndale Bulletin",
+      "why": "Steinmann counter-argument to the coregency count must stay disclosed"
+    }
   ],
   "must_not_include": [
-    {"text": "Tiberius reference, confirmed by Tacitus", "why": "Retired: Tacitus does not fix the fifteenth year to AD 27"},
-    {"text": "fifteenth year of Tiberius, confirmed by Tacitus", "why": "Retired: replaced by the coregency/coin evidence"},
-    {"text": "1437 BC is the epoch", "why": "1437 is the numbering constant, never the epoch"}
+    {
+      "text": "Tiberius reference, confirmed by Tacitus",
+      "why": "Retired: Tacitus does not fix the fifteenth year to AD 27"
+    },
+    {
+      "text": "fifteenth year of Tiberius, confirmed by Tacitus",
+      "why": "Retired: replaced by the coregency/coin evidence"
+    },
+    {
+      "text": "1437 BC is the epoch",
+      "why": "1437 is the numbering constant, never the epoch"
+    },
+    {
+      "text": "a Tiberian regnal year reckoned from AD 13/14",
+      "why": "Retired: Silanus coin dating depends on a disputed Actian-era conversion"
+    }
   ]
 }
