@@ -85,7 +85,7 @@ def add_pdf_notice(source: Path, target: Path) -> None:
         writer.write(fh)
 
 
-def add_xlsx_about_sheet(source: Path, target: Path) -> None:
+def add_xlsx_about_sheet(source: Path, target: Path, workbook_password: str | None = None) -> None:
     wb = load_workbook(filename=str(source))
     if "About" in wb.sheetnames:
         del wb["About"]
@@ -96,7 +96,8 @@ def add_xlsx_about_sheet(source: Path, target: Path) -> None:
         cell.alignment = Alignment(wrap_text=True, vertical="top")
     about.column_dimensions["A"].width = 120
     about.protection.sheet = True
-    wb.security = WorkbookProtection(lockStructure=True, workbookPassword="CJCNOTICE")
+    if workbook_password:
+        wb.security = WorkbookProtection(lockStructure=True, workbookPassword=workbook_password)
     ensure_dir(target)
     wb.save(str(target))
 
@@ -139,7 +140,7 @@ def copy_textual_notice(source: Path, target: Path) -> None:
     shutil.copy2(source, target)
 
 
-def process(source_root: Path, output_root: Path) -> dict:
+def process(source_root: Path, output_root: Path, workbook_password: str | None = None) -> dict:
     supported = {".pdf", ".docx", ".xlsx", ".xlsm", ".png", ".jpg", ".jpeg", ".webp", ".tif", ".tiff"}
     skipped = []
     processed = []
@@ -158,12 +159,12 @@ def process(source_root: Path, output_root: Path) -> dict:
                 add_docx_notice(file_path, target)
                 processed.append(str(file_path.relative_to(source_root)))
             elif suffix in {".xlsx", ".xlsm"}:
-                add_xlsx_about_sheet(file_path, target)
+                add_xlsx_about_sheet(file_path, target, workbook_password=workbook_password)
                 processed.append(str(file_path.relative_to(source_root)))
             elif suffix in {".png", ".jpg", ".jpeg", ".webp", ".tif", ".tiff"}:
                 add_image_margin_watermark(file_path, target)
                 processed.append(str(file_path.relative_to(source_root)))
-            elif suffix in {".txt", ".html"} and file_path.name == "legal-notice.txt":
+            elif suffix == ".txt" and file_path.name == "legal-notice.txt":
                 copy_textual_notice(file_path, target)
                 processed.append(str(file_path.relative_to(source_root)))
             elif suffix not in supported:
@@ -198,12 +199,17 @@ def parse_args() -> argparse.Namespace:
         default=Path("protected-assets"),
         help="Output directory where protected copies are written.",
     )
+    parser.add_argument(
+        "--workbook-password",
+        default=None,
+        help="Optional workbook structure password for spreadsheet outputs.",
+    )
     return parser.parse_args()
 
 
 def main() -> int:
     args = parse_args()
-    report = process(args.source.resolve(), args.output.resolve())
+    report = process(args.source.resolve(), args.output.resolve(), workbook_password=args.workbook_password)
     print(f"Processed files: {len(report['processed_files'])}")
     print(f"Skipped files: {len(report['skipped_files'])}")
     print(f"Report: {args.output / 'processing-report.json'}")
