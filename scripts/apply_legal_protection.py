@@ -85,7 +85,7 @@ def add_pdf_notice(source: Path, target: Path) -> None:
         writer.write(fh)
 
 
-def add_xlsx_about_sheet(source: Path, target: Path, workbook_password: str | None = None) -> None:
+def add_xlsx_about_sheet(source: Path, target: Path, workbook_structure_password: str | None = None) -> None:
     keep_vba = source.suffix.lower() == ".xlsm"
     wb = load_workbook(filename=str(source), keep_vba=keep_vba)
     if "About" in wb.sheetnames:
@@ -97,13 +97,22 @@ def add_xlsx_about_sheet(source: Path, target: Path, workbook_password: str | No
         cell.alignment = Alignment(wrap_text=True, vertical="top")
     about.column_dimensions["A"].width = 120
     about.protection.sheet = True
-    if workbook_password:
-        wb.security = WorkbookProtection(lockStructure=True, workbookPassword=workbook_password)
+    if workbook_structure_password:
+        wb.security = WorkbookProtection(lockStructure=True, workbookPassword=workbook_structure_password)
     ensure_dir(target)
     wb.save(str(target))
 
 
-def add_image_margin_watermark(source: Path, target: Path) -> None:
+def load_watermark_font(watermark_font_path: str | None) -> ImageFont.ImageFont:
+    if watermark_font_path:
+        return ImageFont.truetype(watermark_font_path, 12)
+    try:
+        return ImageFont.truetype("DejaVuSans.ttf", 12)
+    except OSError:
+        return ImageFont.load_default()
+
+
+def add_image_margin_watermark(source: Path, target: Path, watermark_font_path: str | None = None) -> None:
     with Image.open(source) as original:
         image = original.convert("RGBA")
         margin = max(16, int(min(image.width, image.height) * 0.04))
@@ -116,7 +125,7 @@ def add_image_margin_watermark(source: Path, target: Path) -> None:
 
         layer = Image.new("RGBA", canvas_img.size, (255, 255, 255, 0))
         draw = ImageDraw.Draw(layer)
-        font = ImageFont.load_default()
+        font = load_watermark_font(watermark_font_path)
         alpha = int(255 * WATERMARK_OPACITY)
         fill = (*WATERMARK_COLOR, alpha)
         text = NOTICE_SHORT
@@ -144,12 +153,28 @@ def copy_textual_notice(source: Path, target: Path) -> None:
     shutil.copy2(source, target)
 
 
-def process(source_root: Path, output_root: Path, workbook_password: str | None = None) -> dict:
+def process(
+    source_root: Path,
+    output_root: Path,
+    workbook_structure_password: str | None = None,
+    watermark_font_path: str | None = None,
+) -> dict:
     supported = {".pdf", ".docx", ".xlsx", ".xlsm", ".png", ".jpg", ".jpeg", ".webp", ".tif", ".tiff"}
     skipped = []
     processed = []
+    source_root = source_root.resolve()
+    output_root = output_root.resolve()
+    output_rel_parts = None
+    try:
+        output_rel_parts = output_root.relative_to(source_root).parts
+    except ValueError:
+        output_rel_parts = None
+
     for file_path in source_root.rglob("*"):
         if not file_path.is_file():
+            continue
+        rel_file = file_path.relative_to(source_root)
+        if output_rel_parts and rel_file.parts[: len(output_rel_parts)] == output_rel_parts:
             continue
         resolved_file = file_path.resolve()
         if output_root in resolved_file.parents or ".git" in file_path.parts:
@@ -164,10 +189,14 @@ def process(source_root: Path, output_root: Path, workbook_password: str | None 
                 add_docx_notice(file_path, target)
                 processed.append(str(file_path.relative_to(source_root)))
             elif suffix in {".xlsx", ".xlsm"}:
-                add_xlsx_about_sheet(file_path, target, workbook_password=workbook_password)
+                add_xlsx_about_sheet(
+                    file_path,
+                    target,
+                    workbook_structure_password=workbook_structure_password,
+                )
                 processed.append(str(file_path.relative_to(source_root)))
             elif suffix in {".png", ".jpg", ".jpeg", ".webp", ".tif", ".tiff"}:
-                add_image_margin_watermark(file_path, target)
+                add_image_margin_watermark(file_path, target, watermark_font_path=watermark_font_path)
                 processed.append(str(file_path.relative_to(source_root)))
             elif suffix == ".txt" and file_path.name == "legal-notice.txt":
                 copy_textual_notice(file_path, target)
@@ -183,6 +212,7 @@ def process(source_root: Path, output_root: Path, workbook_password: str | None 
         "watermark_opacity": WATERMARK_OPACITY,
         "watermark_color": WATERMARK_COLOR,
         "margin_only": True,
+        "workbook_structure_locked": bool(workbook_structure_password),
         "processed_files": sorted(processed),
         "skipped_files": sorted(skipped),
     }
@@ -205,9 +235,14 @@ def parse_args() -> argparse.Namespace:
         help="Output directory where protected copies are written.",
     )
     parser.add_argument(
-        "--workbook-password",
+        "--workbook-structure-password",
         default=None,
-        help="Optional workbook structure password for spreadsheet outputs.",
+        help="Optional workbook structure password. If omitted, only the About worksheet itself is locked.",
+    )
+    parser.add_argument(
+        "--watermark-font-path",
+        default=None,
+        help="Optional TTF font path for deterministic image watermark rendering.",
     )
     return parser.parse_args()
 
@@ -215,7 +250,12 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     output_root = args.output.resolve()
-    report = process(args.source.resolve(), output_root, workbook_password=args.workbook_password)
+    report = process(
+        args.source.resolve(),
+        output_root,
+        workbook_structure_password=args.workbook_structure_password,
+        watermark_font_path=args.watermark_font_path,
+    )
     print(f"Processed files: {len(report['processed_files'])}")
     print(f"Skipped files: {len(report['skipped_files'])}")
     print(f"Report: {output_root / 'processing-report.json'}")

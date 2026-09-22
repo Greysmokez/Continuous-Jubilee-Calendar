@@ -22,6 +22,11 @@ pip install -r requirements-legal-protection.txt
 python scripts/apply_legal_protection.py --source . --output protected-assets
 ```
 
+Optional flags:
+
+- `--workbook-structure-password "<value>"` to lock workbook structure (in addition to the always-locked About sheet)
+- `--watermark-font-path "/path/to/font.ttf"` to enforce a specific watermark font for image outputs
+
 ## CI workflow
 
 GitHub Actions workflow:
