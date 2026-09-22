@@ -1,0 +1,45 @@
+name: Legal Protection Pipeline
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "**/*.pdf"
+      - "**/*.docx"
+      - "**/*.xlsx"
+      - "**/*.xlsm"
+      - "**/*.png"
+      - "**/*.jpg"
+      - "**/*.jpeg"
+      - "**/*.webp"
+      - "**/*.tif"
+      - "**/*.tiff"
+      - "scripts/apply_legal_protection.py"
+      - "requirements-legal-protection.txt"
+      - "legal/legal-notice.txt"
+
+jobs:
+  protect-assets:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements-legal-protection.txt
+
+      - name: Generate protected assets
+        run: python scripts/apply_legal_protection.py --source . --output protected-assets
+
+      - name: Upload protected assets artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: protected-assets
+          path: protected-assets
