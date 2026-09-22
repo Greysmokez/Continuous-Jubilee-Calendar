@@ -214,14 +214,13 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
-    report = process(args.source.resolve(), args.output.resolve(), workbook_password=args.workbook_password)
+    output_root = args.output.resolve()
+    report = process(args.source.resolve(), output_root, workbook_password=args.workbook_password)
     print(f"Processed files: {len(report['processed_files'])}")
     print(f"Skipped files: {len(report['skipped_files'])}")
-    print(f"Report: {args.output / 'processing-report.json'}")
+    print(f"Report: {output_root / 'processing-report.json'}")
     return 0
 
 
 if __name__ == "__main__":
     raise SystemExit(main())
-    source_root = source_root.resolve()
-    output_root = output_root.resolve()
