@@ -1,5 +1,15 @@
 # Continuous Jubilee Calendar
 
+## The First Publicly Documented SI Kit
+
+*Continuous Jubilee Calendar™ Research Kit for the Super Intelligence Era*
+
+Published by Chip Welsh — September 22, 2026
+
+SI means **Super Intelligence**. “First publicly documented” is a publication claim based on the documented search record and is not a guarantee that no earlier unindexed use exists.
+
+The canonical raw kit filename remains `CJCKit.txt` for backward compatibility.
+
 This repository now includes a non-destructive legal-protection pipeline for downloadable assets.
 
 ## Effective legal notice source
