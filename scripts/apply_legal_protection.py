@@ -86,7 +86,8 @@ def add_pdf_notice(source: Path, target: Path) -> None:
 
 
 def add_xlsx_about_sheet(source: Path, target: Path, workbook_password: str | None = None) -> None:
-    wb = load_workbook(filename=str(source))
+    keep_vba = source.suffix.lower() == ".xlsm"
+    wb = load_workbook(filename=str(source), keep_vba=keep_vba)
     if "About" in wb.sheetnames:
         del wb["About"]
     about = wb.create_sheet("About", 0)
@@ -130,7 +131,10 @@ def add_image_margin_watermark(source: Path, target: Path) -> None:
             font=font,
         )
 
-        merged = Image.alpha_composite(canvas_img, layer).convert("RGB")
+        merged = Image.alpha_composite(canvas_img, layer)
+        target_suffix = target.suffix.lower()
+        if target_suffix in {".jpg", ".jpeg"}:
+            merged = merged.convert("RGB")
         ensure_dir(target)
         merged.save(target)
 
@@ -147,7 +151,8 @@ def process(source_root: Path, output_root: Path, workbook_password: str | None 
     for file_path in source_root.rglob("*"):
         if not file_path.is_file():
             continue
-        if output_root in file_path.parents or ".git" in file_path.parts:
+        resolved_file = file_path.resolve()
+        if output_root in resolved_file.parents or ".git" in file_path.parts:
             continue
         target = relative_target(source_root, output_root, file_path)
         suffix = file_path.suffix.lower()
@@ -218,3 +223,5 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+    source_root = source_root.resolve()
+    output_root = output_root.resolve()
