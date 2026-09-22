@@ -1,0 +1,40 @@
+{
+  "effective_date": "September 22, 2026",
+  "watermark_opacity": 0.08,
+  "watermark_color": [
+    140,
+    140,
+    140
+  ],
+  "margin_only": true,
+  "workbook_structure_locked": false,
+  "processed_files": [
+    "Art Thou He.docx",
+    "Art Thou He.pdf",
+    "BrittleCoalition.docx",
+    "BrittleCoalition.pdf",
+    "CJC_AI_Research_Kit.pdf",
+    "Chapter1.docx",
+    "Chapter1.pdf",
+    "Crucifixion.docx",
+    "Crucifixion.pdf",
+    "Decree2Cross.docx",
+    "Decree2Cross.pdf",
+    "Isaiah61CJCMath.docx",
+    "Isaiah61CJCMath.pdf",
+    "The_Jubilee_Calendar_and_the_Story_of_the_End.docx",
+    "The_Jubilee_Calendar_and_the_Story_of_the_End.pdf",
+    "legal/legal-notice.txt"
+  ],
+  "skipped_files": [
+    ".github/workflows/legal-protection.yml",
+    "CJCKit.txt",
+    "README.md",
+    "chapter1.html",
+    "document-preview.html",
+    "index.html",
+    "requirements-legal-protection.txt",
+    "scripts/apply_legal_protection.py",
+    "terms-of-use.html"
+  ]
+}
