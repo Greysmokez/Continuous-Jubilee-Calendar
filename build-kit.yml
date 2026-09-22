@@ -1,0 +1,116 @@
+name: Build CJC Kit
+
+# Edit ONLY kit-source/kit-master.txt (or si-header.txt / kit-rules.json).
+# This workflow then rebuilds and publishes:
+#   CJCKit.txt, CJC_AI_Research_Kit.pdf, protected-assets/  -> this repo
+#   kit.txt                                                  -> Greysmokez/CJC-Website
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "kit-source/**"
+      - "scripts/build_kit.py"
+      - ".github/workflows/build-kit.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-cjc-kit
+  cancel-in-progress: false
+
+env:
+  PYTHONDONTWRITEBYTECODE: "1"
+  WEBSITE_REPO: Greysmokez/CJC-Website
+
+jobs:
+  build:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout this repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install LibreOffice and fonts (for the PDF)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq --no-install-recommends \
+            libreoffice-writer fonts-crosextra-caladea fonts-crosextra-carlito fonts-dejavu
+
+      - name: Install Python packages
+        run: pip install -r requirements-legal-protection.txt
+
+      - name: Check rules and build all kit copies
+        run: python scripts/build_kit.py --website-out "$RUNNER_TEMP/website"
+
+      # The existing Legal Protection workflow ignores commits made by this bot,
+      # so the watermarked copy is produced here instead.
+      - name: Refresh protected assets
+        run: python scripts/apply_legal_protection.py --source . --output protected-assets
+
+      - name: Commit kit files to this repo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add CJCKit.txt CJC_AI_Research_Kit.pdf protected-assets/
+          if git diff --cached --quiet; then
+            echo "No kit changes to commit in this repo."
+            exit 0
+          fi
+          git commit -m "Build kit from kit-master.txt [skip ci]"
+          for attempt in 1 2 3; do
+            if git pull --rebase origin main && git push origin HEAD:main; then
+              echo "Pushed kit build."
+              exit 0
+            fi
+            [ "$attempt" -eq 3 ] && { echo "::error::Could not push after 3 attempts. Re-run the workflow."; exit 1; }
+            sleep $((attempt * 2))
+          done
+
+      - name: Check website token is set
+        env:
+          TOKEN: ${{ secrets.WEBSITE_REPO_TOKEN }}
+        run: |
+          if [ -z "$TOKEN" ]; then
+            echo "::error::Secret WEBSITE_REPO_TOKEN is missing. See KIT-SETUP.md, step 2."
+            exit 1
+          fi
+
+      - name: Checkout CJC-Website
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.WEBSITE_REPO }}
+          token: ${{ secrets.WEBSITE_REPO_TOKEN }}
+          path: website
+
+      - name: Publish kit.txt to CJC-Website
+        working-directory: website
+        run: |
+          cp "$RUNNER_TEMP/website/kit.txt" kit.txt
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add kit.txt
+          if git diff --cached --quiet; then
+            echo "Website kit.txt already up to date."
+            exit 0
+          fi
+          git commit -m "Update kit.txt from Continuous-Jubilee-Calendar kit-master.txt"
+          for attempt in 1 2 3; do
+            BRANCH=$(git rev-parse --abbrev-ref HEAD)
+            if git pull --rebase origin "$BRANCH" && git push origin "HEAD:$BRANCH"; then
+              echo "Pushed kit.txt to $WEBSITE_REPO."
+              exit 0
+            fi
+            [ "$attempt" -eq 3 ] && { echo "::error::Could not push to $WEBSITE_REPO after 3 attempts."; exit 1; }
+            sleep $((attempt * 2))
+          done

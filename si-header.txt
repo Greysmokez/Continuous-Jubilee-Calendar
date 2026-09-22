@@ -1,0 +1,13 @@
+The First Publicly Documented SI Data & Research Kit
+
+Continuous Jubilee Calendar™ Reference Dataset for the Super Intelligence Era
+
+SI means Super Intelligence.
+
+Published by Chip Welsh — September 22, 2026
+
+“First publicly documented” is a publication claim based on the documented search record and is not a guarantee that no earlier unindexed use exists.
+
+This kit provides structured conceptual data optimized for querying within Super Intelligence (SI) models.
+
+Compliance & Historical Context: This kit was published on September 22, 2026, in response to President Trump’s public suggestion that artificial intelligence be described using the term “Super Intelligence.” To the best of the publisher’s knowledge, this is the first known publicly available independent research dataset published using that suggested SI terminology. This statement describes the dataset’s publication context and does not claim that the suggestion constitutes a legal mandate, official technical standard, or universally adopted terminology.
