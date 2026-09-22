@@ -4,7 +4,7 @@ This repository now includes a non-destructive legal-protection pipeline for dow
 
 ## Effective legal notice source
 
-- Shared notice text: `/home/runner/work/Continuous-Jubilee-Calendar/Continuous-Jubilee-Calendar/legal/legal-notice.txt`
+- Shared notice text: `legal/legal-notice.txt`
 - Effective date in notice text: **September 22, 2026**
 
 ## What the pipeline applies
@@ -31,7 +31,7 @@ Optional flags:
 
 GitHub Actions workflow:
 
-- `/home/runner/work/Continuous-Jubilee-Calendar/Continuous-Jubilee-Calendar/.github/workflows/legal-protection.yml`
+- `.github/workflows/legal-protection.yml`
 
 It runs the same script and uploads `protected-assets/` as an artifact for each run.
 
