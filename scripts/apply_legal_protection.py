@@ -42,9 +42,9 @@ def add_docx_notice(source: Path, target: Path) -> None:
     doc = Document(str(source))
     for section in doc.sections:
         footer = section.footer
-        paragraph = footer.paragraphs[0] if footer.paragraphs else footer.add_paragraph()
-        if NOTICE_FOOTER in paragraph.text:
+        if any(NOTICE_FOOTER in p.text for p in footer.paragraphs):
             continue
+        paragraph = footer.paragraphs[0] if footer.paragraphs else footer.add_paragraph()
         if paragraph.text.strip():
             paragraph.add_run("  ")
         run = paragraph.add_run(NOTICE_FOOTER)
@@ -116,10 +116,12 @@ def add_image_margin_watermark(source: Path, target: Path, watermark_font_path: 
     with Image.open(source) as original:
         image = original.convert("RGBA")
         margin = max(16, int(min(image.width, image.height) * 0.04))
+        supports_alpha = target.suffix.lower() not in {".jpg", ".jpeg"}
+        background = (255, 255, 255, 0) if supports_alpha else (255, 255, 255, 255)
         canvas_img = Image.new(
             "RGBA",
             (image.width + margin * 2, image.height + margin * 2),
-            (255, 255, 255, 255),
+            background,
         )
         canvas_img.paste(image, (margin, margin))
 
