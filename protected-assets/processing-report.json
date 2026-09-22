@@ -27,14 +27,19 @@
     "legal/legal-notice.txt"
   ],
   "skipped_files": [
+    ".github/workflows/build-kit.yml",
     ".github/workflows/legal-protection.yml",
     "CJCKit.txt",
     "README.md",
     "chapter1.html",
     "document-preview.html",
     "index.html",
+    "kit-source/kit-master.txt",
+    "kit-source/kit-rules.json",
+    "kit-source/si-header.txt",
     "requirements-legal-protection.txt",
     "scripts/apply_legal_protection.py",
+    "scripts/build_kit.py",
     "terms-of-use.html"
   ]
 }
