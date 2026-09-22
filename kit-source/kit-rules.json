@@ -16,6 +16,14 @@
     {
       "text": "Tyndale Bulletin",
       "why": "Steinmann counter-argument to the coregency count must stay disclosed"
+    },
+    {
+      "text": "dates the Year 1 coin to AD 14/15",
+      "why": "Silanus coins: state the catalogue date; do not cite them as AD 13/14"
+    },
+    {
+      "text": "Present the case in this order. First, Daniel 9:25",
+      "why": "Tiberius section leads with Daniel 9:25 and John's Gospel"
     }
   ],
   "must_not_include": [
@@ -34,6 +42,10 @@
     {
       "text": "a Tiberian regnal year reckoned from AD 13/14",
       "why": "Retired: Silanus coin dating depends on a disputed Actian-era conversion"
+    },
+    {
+      "text": "These coins support the coregency count only under Lanser's era conversion",
+      "why": "Retired v12.17: kit no longer uses the Silanus coins as support"
     }
   ]
 }
