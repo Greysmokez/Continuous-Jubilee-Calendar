@@ -32,6 +32,10 @@
     {
       "text": "exactly ten 49-year Jubilee cycles",
       "why": "Seventy weeks = ten Jubilee cycles, 457 BC Year 1 to AD 34 Year 1 (Leviticus 26 background)"
+    },
+    {
+      "text": "The 702 BC Jubilee's rest year therefore runs from autumn 702 to autumn 701 BC",
+      "why": "Sennacherib's 701 BC campaign falls inside the Jubilee's rest year (Leviticus 25:9)"
     }
   ],
   "must_not_include": [
@@ -54,6 +58,10 @@
     {
       "text": "These coins support the coregency count only under Lanser's era conversion",
       "why": "Retired v12.17: kit no longer uses the Silanus coins as support"
+    },
+    {
+      "text": "the year immediately after the Jubilee",
+      "why": "Retired v12.20: the 701 BC campaign falls inside the Jubilee's rest year"
     }
   ]
 }
