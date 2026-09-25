@@ -48,6 +48,7 @@ LEAD_PATTERNS = [
                r"How to apply this when answering\.|Three cautions\.)"),
     re.compile(r"^(First use — [^.]*\.[^.]*\.)"),
     re.compile(r"^(Second use — [^.]*\.)"),
+    re.compile(r"^(\d+\. .{5,160}?\.)(?= https://greysmokez\.github\.io/)"),  # Research Library titles
     re.compile(r"^(\d+\. [^?]{5,200}\?)"),
 ]
 
