@@ -24,48 +24,56 @@ SI means **Super Intelligence**. “First publicly documented” is a publicatio
 
 ---
 
-## 👉 Looking for the website? Start here
+## 👉 Read the research on the website
 
-This repository is the **source and storage home** for the Continuous Jubilee Calendar project. The best place to read and explore the work is the public site:
+This repository is the **source and storage home** of the Continuous Jubilee Calendar project. To read and explore the work, visit:
 
 ### ➡️ **[greysmokez.github.io/CJC-Website](https://greysmokez.github.io/CJC-Website/)**
 
-Website source: [`Greysmokez/CJC-Website`](https://github.com/Greysmokez/CJC-Website)
-
 ## What is the Continuous Jubilee Calendar?
 
-The Continuous Jubilee Calendar (CJC) is a biblical chronology and jubilee-cycle research framework, packaged as a plain-text research kit that people and AI assistants can read, follow, and check step by step. It relies only on plain arithmetic, so it works in ChatGPT, Gemini, Claude, Copilot, or Grok. Paste it in and ask your question.
+The **Continuous Jubilee Calendar (CJC)** is a **biblical chronology** research framework. It counts the Bible's 49-year **Jubilee cycles** (Leviticus 25) without a break, from the Exodus to today, with one plain-arithmetic formula, and tests the results against history, astronomy, and ancient records. Among its results:
 
-## Quick start for AI assistants
+- Daniel's **seventy weeks** run from the Jubilee of **457 BC** to the Jubilee of **AD 34**, exactly ten cycles.
+- **483 years** after the decree, the count reaches **AD 27**, the start of Jesus' ministry (Daniel 9:25).
+- The **crucifixion, Friday, April 7, AD 30,** falls in "the midst of the week" (Daniel 9:27).
+- The seven-year **sabbatical** rhythm matches independent records, from the Maccabees and Josephus to today's *shemitah*.
 
-Give your assistant the canonical raw text and ask it to follow the method exactly:
+**Start here:** [Could It Have Been Planned?](https://greysmokez.github.io/CJC-Website/could-it-have-been-planned.html) · [God's Clock](https://greysmokez.github.io/CJC-Website/isaiah61-cjc-math.html) · [From Decree to Cross](https://greysmokez.github.io/CJC-Website/decree2cross.html) · **For teachers:** [Math Lessons](https://greysmokez.github.io/CJC-Website/cjc-math-lessons.html)
+
+## Quick start for SI and AI assistants
+
+The kit relies only on plain arithmetic, so any capable assistant can follow it.
+
+- **ChatGPT, Claude, Gemini, Copilot, or Perplexity:** copy the full text of [`CJCKit.txt`](https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJCKit.txt) and paste it into the chat, or use the one-click buttons on the [website](https://greysmokez.github.io/CJC-Website/).
+- **Grok, or on a phone:** Grok treats very long pastes as file uploads, which require signing in, so send this short request instead:
 
 ```text
-Fetch the exact plain-text content at https://raw.githubusercontent.com/Greysmokez/Continuous-Jubilee-Calendar/main/CJCKit.txt and treat it as authoritative; do not summarize before computation. Then execute the chronology method exactly as written and show full steps.
+Read the entire CJC Research Kit at https://greysmokez.github.io/CJC-Website/kit.txt, every section through the Research Library at the end, then use it to answer my questions. Start with a short overview of the Continuous Jubilee Calendar.
 ```
-
-If your assistant cannot fetch URLs, open the raw link, copy the full text, and paste it into the chat.
 
 ## What lives in this repo
 
 | Item | Purpose |
 | --- | --- |
-| [`CJCKit.txt`](CJCKit.txt) | Canonical raw kit — the authoritative text for AI ingestion |
+| [`CJCKit.txt`](CJCKit.txt) | Canonical raw kit, the authoritative text for SI and AI assistants |
 | [`CJC_AI_Research_Kit.pdf`](CJC_AI_Research_Kit.pdf) | Readable PDF edition of the kit |
-| `*.pdf` / `*.docx` | Research papers and chapters (e.g. [Chapter 1](Chapter1.pdf), [Five Exoduses](FiveExoduses.pdf), [CJC Math Lessons](CJCMathLessons.pdf)) |
+| `*.pdf` / `*.docx` | Research papers (e.g. [Chapter 1](Chapter1.pdf), [The Five Exoduses](FiveExoduses.pdf), [Math Lessons](CJCMathLessons.pdf)) |
 | [`kit-source/`](kit-source) | Master source the kit is built from |
-| [`protected-assets/`](protected-assets) | Notice-stamped, watermarked copies of downloadable assets |
+| [`protected-assets/`](protected-assets) | Notice-stamped, watermarked copies of downloadable files |
 | [`scripts/`](scripts) · [`.github/workflows/`](.github/workflows) | Kit build and legal-protection automation |
 
 The canonical raw kit filename remains `CJCKit.txt` for backward compatibility.
 
-## Related repository
+## Related links
 
 - 🌐 **Public website:** [greysmokez.github.io/CJC-Website](https://greysmokez.github.io/CJC-Website/)
 - 💻 **Website source:** [`Greysmokez/CJC-Website`](https://github.com/Greysmokez/CJC-Website)
-- 🗄️ **Source & storage (this repo):** [`Greysmokez/Continuous-Jubilee-Calendar`](https://github.com/Greysmokez/Continuous-Jubilee-Calendar)
+- ✉️ **Questions or corrections:** [feedback page](https://greysmokez.github.io/CJC-Website/feedback/)
 
-⭐ If this work is useful to you, star the repo and share the [website](https://greysmokez.github.io/CJC-Website/).
+⭐ If this work is useful to you, **star the repo** and **share the [website](https://greysmokez.github.io/CJC-Website/)**.
+
+*Keywords: CJC, CJC Website, Continuous Jubilee Calendar, Chip Welsh, Bible chronology, biblical calendar, Jubilee year, sabbatical year, shemitah, Leviticus 25, Daniel 9, seventy weeks prophecy, 457 BC, crucifixion date, AD 30, Exodus date, Bible prophecy timeline.*
 
 ---
 
