@@ -2,6 +2,10 @@
   "_about": "Consistency rules checked on every build. If a rule fails, the build stops and nothing is published, so an out-of-date kit can never go live. Add a rule whenever a claim is settled or a phrase is retired.",
   "must_include": [
     {
+      "text": "Research Library at a glance. The CJC papers develop this kit in full.",
+      "why": "Short library index near the top, so assistants that read only the start still find every paper (its entries are checked against the full library by build_kit.py)"
+    },
+    {
       "text": "RIC 225",
       "why": "Tiberius coregency coin evidence (Luke 3:1 -> AD 27)"
     },
