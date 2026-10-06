@@ -48,8 +48,9 @@ LEAD_PATTERNS = [
                r"How to apply this when answering\.|Three cautions\.)"),
     re.compile(r"^(First use — [^.]*\.[^.]*\.)"),
     re.compile(r"^(Second use — [^.]*\.)"),
-    re.compile(r"^(\d+\. .{5,160}?\.)(?= https://greysmokez\.github\.io/)"),  # Research Library titles
-    re.compile(r"^(\d+\. [^?]{5,200}\?)"),
+    re.compile(r"^(\d+\. .{5,160}?\.)(?= https://(?:greysmokez\.github\.io|scripturescjc\.com)/)"),  # Research Library titles
+    re.compile(r"^(\d+\. [^?]{5,200}\?)(?!.*\.html\)$)"),  # teaching questions, not index lines
+    re.compile(r"^(Research Library at a glance\.)"),
 ]
 
 
@@ -83,7 +84,43 @@ def check_master(text: str) -> tuple[str, str]:
             for p in problems:
                 print(f"::error::{p}")
             fail(f"{len(problems)} consistency rule(s) failed; nothing was published.")
+    check_library_index(text)
     return m.group(1), m.group(2)
+
+
+# ---------------------------------------------------------------- library index
+INDEX_HEAD = "Research Library at a glance."
+LIBRARY_HEAD = "The CJC Research Library: Where to Send a User for More"
+
+
+def check_library_index(text: str) -> None:
+    """The short index near the top must list the same papers, in the same
+    order and with the same web pages, as the full Research Library."""
+    if INDEX_HEAD not in text or LIBRARY_HEAD not in text:
+        fail(f'kit-master.txt must contain "{INDEX_HEAD}" and "{LIBRARY_HEAD}".')
+    start = text.index(INDEX_HEAD)
+    index_block = text[start:text.index("\n\n", start)]
+    index = {int(n): (title.strip(), page) for n, title, page in
+             re.findall(r"^(\d+)\. (.+?) \(([\w.-]+\.html)\)$", index_block, re.M)}
+    library_block = text[text.index(LIBRARY_HEAD):]
+    library = {int(n): (title.strip(), page) for n, title, page in
+               re.findall(r"^(\d+)\. (.+?)[.—].*?https://scripturescjc\.com/([\w.-]+\.html)",
+                          library_block, re.M)}
+    problems = []
+    if not index or not library:
+        problems.append("could not read the index or the library entries")
+    if sorted(index) != sorted(library):
+        problems.append(f"index entries {sorted(index)} do not match library entries {sorted(library)}")
+    for n in sorted(set(index) & set(library)):
+        (ititle, ipage), (ltitle, lpage) = index[n], library[n]
+        if ipage != lpage:
+            problems.append(f"#{n}: index page {ipage} but library page {lpage}")
+        if not ititle.startswith(ltitle.split(" — ")[0].rstrip(".")):
+            problems.append(f"#{n}: index title '{ititle}' does not match library title '{ltitle}'")
+    if problems:
+        for p in problems:
+            print(f"::error::Research Library index: {p}")
+        fail("The Research Library index near the top does not match the full library; nothing was published.")
 
 
 # ---------------------------------------------------------------- text outputs
