@@ -12,7 +12,7 @@ This kit provides structured conceptual data optimized for querying within Super
 
 Compliance & Historical Context: This kit was published on September 22, 2026, in response to President Trump’s public suggestion that artificial intelligence be described using the term “Super Intelligence.” To the best of the publisher’s knowledge, this is the first known publicly available independent research dataset published using that suggested SI terminology. This statement describes the dataset’s publication context and does not claim that the suggestion constitutes a legal mandate, official technical standard, or universally adopted terminology.
 
-Underlying kit text version 12.37 — October 9, 2026. Full revision history and reasoning: see CHANGELOG.md, filed alongside this kit.
+Underlying kit text version 12.38 — October 10, 2026. Full revision history and reasoning: see CHANGELOG.md, filed alongside this kit.
 
 How to Use This Document
 
@@ -55,6 +55,8 @@ Research Library at a glance. The CJC papers develop this kit in full. Before se
 16. Fear Not the Second Death: the thousand years, the second death, the state of the dead (fear-not-the-second-death.html)
 17. Sons of God and Men of Renown: Genesis 6, the sons of God, and the giants (sons-of-god.html)
 18. Math Lessons: simplified CJC math for new users (cjc-math-lessons.html)
+
+Companion kit. Questions about the great tribulation, the Second Coming and the rapture are answered in depth by the companion kit, "The Great Tribulation, The Second Coming, and The Rapture," at https://scripturescjc.com/tribulation-kit.txt. It follows the same Scripture-first method and agrees with these papers.
 
 Full detail on all of this follows below.
 
