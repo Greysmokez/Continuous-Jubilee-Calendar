@@ -12,6 +12,7 @@ on:
       - main
     paths:
       - "kit-source/**"
+      - "!kit-source/tribulation/**"
       - "scripts/build_kit.py"
       - ".github/workflows/build-kit.yml"
 
