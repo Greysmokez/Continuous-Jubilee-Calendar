@@ -40,6 +40,7 @@ RED_FLAGS = {
     "Antiochus as a fulfillment": r"Antiochus[^.\n]{0,60}fulfil",
     "seven-year tribulation asserted": r"(?<![Nn]o )(?<![Nn]o future )seven[- ]year tribulation",
     "beast from the earth called Lucifer": r"beast (from|out of) the earth[^.\n]{0,60}(is|was) (Lucifer|Satan)",
+    "false prophet called Lucifer": r"false prophet[^.\n]{0,20}(is|was|=) (Lucifer|Satan|the devil)",
     "Jude 14 or Zechariah 14:4-5 at the last trump": r"(Jude 14|Zechariah 14:[45])[^.\n]{0,120}last trump",
     "Babylon called Jerusalem": r"Babylon[^.\n]{0,40}(is|was) Jerusalem",
     "Revelation 10:6 tied to the censer": r"(10:6|time no longer)[^.\n]{0,120}censer",
