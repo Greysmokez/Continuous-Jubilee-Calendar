@@ -1,0 +1,111 @@
+name: Build Tribulation Kit
+
+# Edit ONLY kit-source/tribulation/ (header, positions, timeline, question index, entries).
+# This workflow checks the rules, then rebuilds and publishes:
+#   TribulationKit.txt, Tribulation_AI_Research_Kit.pdf  -> this repo
+#   tribulation-kit.txt                                   -> Greysmokez/CJC-Website
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "kit-source/tribulation/**"
+      - "scripts/build_trib_kit.py"
+      - ".github/workflows/build-trib-kit.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-trib-kit
+  cancel-in-progress: false
+
+env:
+  PYTHONDONTWRITEBYTECODE: "1"
+  WEBSITE_REPO: Greysmokez/CJC-Website
+
+jobs:
+  build:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout this repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install LibreOffice and fonts (for the PDF)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq --no-install-recommends \
+            libreoffice-writer fonts-crosextra-caladea fonts-crosextra-carlito fonts-dejavu
+
+      - name: Install Python packages
+        run: pip install -r requirements-legal-protection.txt
+
+      - name: Check rules and build all kit copies
+        run: python scripts/build_trib_kit.py --website-out "$RUNNER_TEMP/website"
+
+      - name: Commit kit files to this repo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add TribulationKit.txt Tribulation_AI_Research_Kit.pdf
+          if git diff --cached --quiet; then
+            echo "No kit changes to commit in this repo."
+            exit 0
+          fi
+          git commit -m "Build tribulation kit [skip ci]"
+          for attempt in 1 2 3; do
+            if git pull --rebase origin main && git push origin HEAD:main; then
+              echo "Pushed kit build."
+              exit 0
+            fi
+            [ "$attempt" -eq 3 ] && { echo "::error::Could not push after 3 attempts. Re-run the workflow."; exit 1; }
+            sleep $((attempt * 2))
+          done
+
+      - name: Check website token is set
+        env:
+          TOKEN: ${{ secrets.WEBSITE_REPO_TOKEN }}
+        run: |
+          if [ -z "$TOKEN" ]; then
+            echo "::error::Secret WEBSITE_REPO_TOKEN is missing. See KIT-SETUP.md, step 2."
+            exit 1
+          fi
+
+      - name: Checkout CJC-Website
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.WEBSITE_REPO }}
+          token: ${{ secrets.WEBSITE_REPO_TOKEN }}
+          path: website
+
+      - name: Publish tribulation-kit.txt to CJC-Website
+        working-directory: website
+        run: |
+          cp "$RUNNER_TEMP/website/tribulation-kit.txt" tribulation-kit.txt
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tribulation-kit.txt
+          if git diff --cached --quiet; then
+            echo "Website tribulation-kit.txt already up to date."
+            exit 0
+          fi
+          git commit -m "Update tribulation-kit.txt from kit-source/tribulation"
+          for attempt in 1 2 3; do
+            BRANCH=$(git rev-parse --abbrev-ref HEAD)
+            if git pull --rebase origin "$BRANCH" && git push origin "HEAD:$BRANCH"; then
+              echo "Pushed tribulation-kit.txt to $WEBSITE_REPO."
+              exit 0
+            fi
+            [ "$attempt" -eq 3 ] && { echo "::error::Could not push to $WEBSITE_REPO after 3 attempts."; exit 1; }
+            sleep $((attempt * 2))
+          done
