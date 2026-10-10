@@ -51,6 +51,7 @@
   ],
   "skipped_files": [
     ".github/workflows/build-kit.yml",
+    ".github/workflows/build-trib-kit.yml",
     ".github/workflows/legal-protection.yml",
     "CJCKit.txt",
     "README.md",
