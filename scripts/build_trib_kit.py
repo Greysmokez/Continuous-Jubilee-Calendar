@@ -48,6 +48,7 @@ RED_FLAGS = {
     "Jude 14 or Zechariah 14:4-5 at the last trump": r"(Jude 14|Zechariah 14:[45])[^.\n]{0,120}last trump",
     "Babylon called Jerusalem": r"Babylon[^.\n]{0,40}(is|was) Jerusalem",
     "Revelation 10:6 tied to the censer": r"(10:6|time no longer)[^.\n]{0,120}censer",
+    "two witnesses called the Old and New Testaments": r"two witnesses[^.\n]{0,80}(Old and New|Old Testament and the New|two testaments)",
     "a future calendar date": r"\b20[3-9]\d\b",
     "'cannot' said of the Holy Spirit": r"(Holy )?Spirit[^.\n]{0,30}cannot",
 }
