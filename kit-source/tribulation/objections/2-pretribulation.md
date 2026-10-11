@@ -30,7 +30,7 @@ Papers: pre-tribulation.html, the-shepherds-gathering.html
 ### O20. "Daniel's seventieth week is a future seven-year tribulation, after a gap."
 Keywords: 70th week, seven years, gap, Daniel 9:27, covenant with many, Antichrist treaty
 Answer: Daniel's seventy weeks are one unbroken count: "Seventy weeks are determined upon thy people" (Daniel 9:24). They run from the decree of 457 BC to AD 34 (ten Jubilee cycles; see "How the dates are determined"). The "he" who confirms the covenant is the Messiah of the verse before: "after threescore and two weeks shall Messiah be cut off, but not for himself" (9:26), "And he shall confirm the covenant with many for one week: and in the midst of the week he shall cause the sacrifice and the oblation to cease" (9:27). Jesus used the same words for His own covenant: "this is my blood of the new testament, which is shed for many" (Matthew 26:28). At the cross, in the midst of the week (AD 30), the veil tore and the sacrifices lost their purpose (Matthew 27:51; Hebrews 10:18). Nothing in the text lifts the last week out and moves it two thousand years.
-Papers: pre-tribulation.html, jubilee-calendar-story-of-the-end.html
+Papers: seventy-weeks.html, pre-tribulation.html, jubilee-calendar-story-of-the-end.html
 
 ### O21. "There are two comings: a secret rapture for the church, then a visible return seven years later."
 Keywords: two comings, secret rapture, signless, Noah and Lot, mid-trib, imminent
