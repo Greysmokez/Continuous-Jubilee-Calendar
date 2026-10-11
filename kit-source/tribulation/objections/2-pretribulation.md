@@ -19,7 +19,7 @@ Papers: pre-tribulation.html
 
 ### O18. "The church isn't mentioned after Revelation 3, so it must be in heaven."
 Keywords: church absent, no church in Revelation 4-19, saints are Israel
-Answer: The word "church" isn't used, but God's people are everywhere in those chapters, under Scripture's other names for them: "the saints" (Revelation 13:7, 10; 14:12; 16:6; 17:6), "they that keep the commandments of God, and have the testimony of Jesus Christ" (Revelation 12:17), and "the faith of Jesus" (14:12). Jesus speaks to them during the sixth bowl: "Behold, I come as a thief. Blessed is he that watcheth, and keepeth his garments" (16:15). And at the end He says, "I Jesus have sent mine angel to testify unto you these things in the churches" (22:16): the whole book was written for the churches.
+Answer: The word "church" isn't used, but God's people are everywhere in those chapters, under Scripture's other names for them: "the saints" (Revelation 13:7, 10; 14:12; 16:6; 17:6), "which keep the commandments of God, and have the testimony of Jesus Christ" (Revelation 12:17), and "the faith of Jesus" (14:12). Jesus speaks to them during the sixth bowl: "Behold, I come as a thief. Blessed is he that watcheth, and keepeth his garments" (16:15). And at the end He says, "I Jesus have sent mine angel to testify unto you these things in the churches" (22:16): the whole book was written for the churches.
 Papers: pre-tribulation.html, the-shepherds-gathering.html
 
 ### O19. "The restrainer of 2 Thessalonians 2 is the church, removed before the man of sin appears."

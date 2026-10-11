@@ -62,7 +62,7 @@ Papers: five-exoduses.html, pre-tribulation.html
 
 ### O11. "Isaiah 65's new heavens and earth still have death in them, so the new earth is now."
 Keywords: Isaiah 65:20, new heavens and new earth, hundred years old, no more curse
-Answer: Isaiah says "the sinner being an hundred years old shall be accursed" (Isaiah 65:20). John answers it: "And there shall be no more curse" (Revelation 22:3), and "there shall be no more death, neither sorrow, nor crying" (21:4). Isaiah himself saw beyond 65:20: "He will swallow up death in victory" (Isaiah 25:8), and Paul says when: "when this mortal shall have put on immortality, then shall be brought to pass the saying that is written, Death is swallowed up in victory" (1 Corinthians 15:54).
+Answer: Isaiah says "the sinner being an hundred years old shall be accursed" (Isaiah 65:20). John answers it: "And there shall be no more curse" (Revelation 22:3), and "there shall be no more death, neither sorrow, nor crying" (21:4). Isaiah himself saw beyond 65:20: "He will swallow up death in victory" (Isaiah 25:8), and Paul says when: "when this corruptible shall have put on incorruption, and this mortal shall have put on immortality, then shall be brought to pass the saying that is written, Death is swallowed up in victory" (1 Corinthians 15:54).
 This research reads the mortal details of Isaiah 65:20 as part of a promise God made to the nation conditionally, by His own rule: "at what instant I shall speak concerning a nation... to build and to plant it; If it do evil in my sight... then I will repent of the good" (Jeremiah 18:9-10). Peter and John carry the promise forward in its fullness, where death is gone.
 Papers: fear-not-the-second-death.html
 
