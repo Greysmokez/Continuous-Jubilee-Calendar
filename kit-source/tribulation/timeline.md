@@ -1,4 +1,4 @@
-# Timeline of the great tribulation (Chip's reading; Scripture gives the order)
+# Timeline of the great tribulation (this research's reading; Scripture gives the order)
 
 Scripture states only three day counts for the end: 1,260, 1,290 and 1,335 (Daniel 12:7, 11-12; Revelation 11:3; 12:6). Everything else is placed by Revelation's own order, in general terms ("with the fourth seal," "after the fifth trumpet," "during the sixth seal"). Give no other day numbers and no future calendar dates.
 
@@ -12,7 +12,7 @@ Scripture states only three day counts for the end: 1,260, 1,290 and 1,335 (Dani
 
 Already fulfilled
 1. The Lamb receives the book. "And he came and took the book out of the right hand of him that sat upon the throne" (Revelation 5:7); Daniel saw the same court: "there was given him dominion, and glory, and a kingdom" (Daniel 7:13-14). This research places it after the 1,260 years of the woman in the wilderness ended (1798; Revelation 12:6, 14); Scripture gives no year.
-2. Seals one through three open (6:1-6). The judgment of the dead begins in heaven (1844; Daniel 8:14; 7:9-10).
+2. Seals one through three, the white, red and black horses, open after the 1,260 years end and "the judgment shall sit" (Daniel 7:25-26; Revelation 6:1-6): the gospel goes out, division and persecution follow, and the heavenly court weighs every life. They are still running; Scripture gives them no measured length, so no exact years are given. The fourth seal, the pale horse, is still future (milestone 4).
 
 Before the tribulation (future)
 3. The pause. The four winds are held "till we have sealed the servants of our God in their foreheads" (7:1-3); the 144,000 are sealed (7:4).

@@ -1,4 +1,4 @@
-# Question index (Chip's top 20, in order). Answer each from the key verses, positions.md, timeline.md and the listed papers. Entries 01-04 are full worked examples.
+# Question index (the top 20, in order). Answer each from the key verses, positions.md, timeline.md and the listed papers. Entries 01-04 are full worked examples.
 
 ## The Timing and Signs
 01. Can we know the day or the hour? — No date can be set in advance, but watchers know it is near once the count begins, as Noah was told "yet seven days." Key: Matthew 24:32-39; Genesis 7:4, 10; 1 Thessalonians 5:1-4; Daniel 12:12. Papers: fear-not-the-second-death, jubilee-calendar-story-of-the-end. (Full entry 01.)
@@ -15,7 +15,7 @@
 ## The Book of Revelation Entities & Events
 09. Who is the Antichrist? — The dragon, Satan, is THE Antichrist; "many antichrists" are historical parallels; the man of sin is Lucifer, working through the false prophet he possesses, revealed sitting as God on the holy mountain; the false prophet is an unidentified being he possesses. Key: Revelation 12:9; 9:11; 13:1-17; 17:8-17; 19:20; 2 Thessalonians 2:3-9; Daniel 11:45; Isaiah 14:13-16; 1 John 2:18. Papers: pre-tribulation, brittle-coalition, the-shepherds-gathering.
 10. What is the Mark of the Beast (666)? — State its purpose from Scripture (buy and sell, worship, the death decree); technology shows how easily a mark could serve, but after the first four trumpets a physical mark is probable, not definite. No name speculation. Key: Revelation 13:15-18; 14:9-11; 7:3; 20:4. Papers: brittle-coalition, the-shepherds-gathering.
-11. The Four Horsemen — Christ's own campaign carried out by His Spirit; seals 1-3 already opened; the fourth seal starts the great tribulation. Key: Revelation 6:1-8; Zechariah 6:1-8; Zechariah 4:6. Papers: four-horsemen.
+11. The Four Horsemen — one horseman per seal: white (seal 1, the gospel), red (seal 2, division and persecution), black (seal 3, judgment), pale (seal 4, still future, at the censer). Christ's own campaign carried out by His Spirit; seals 1-3 opened after 1798 and are still running; see "The first four seals are the four horsemen." Key: Revelation 6:1-8; Zechariah 6:1-8; Zechariah 4:6. Papers: four-horsemen.
 12. Who are the Two Witnesses? — God's Word in its two testimonies, lit by the Spirit and carried by His people. Key: Revelation 11:3-12; Zechariah 4:2-6, 11-14; Jeremiah 5:14; Revelation 1:2; 12:17; John 5:39; Deuteronomy 19:15. Papers: the-shepherds-gathering, jubilee-calendar-story-of-the-end.
 13. The Battle of Armageddon — At the sixth bowl the kings gather; it ends at His coming by "the sword of his mouth." It is separate from Gog and Magog after the thousand years. Key: Revelation 16:12-16; 19:11-21; 20:7-9. Papers: the-shepherds-gathering, fear-not-the-second-death.
 
