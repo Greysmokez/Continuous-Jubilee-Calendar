@@ -38,6 +38,8 @@
     "OneCommandment.pdf",
     "PreTribulation.docx",
     "PreTribulation.pdf",
+    "SeventyWeeks.docx",
+    "SeventyWeeks.pdf",
     "SonsOfGod.docx",
     "SonsOfGod.pdf",
     "TheShepherdsGathering.docx",
@@ -73,11 +75,14 @@
     "kit-source/tribulation/objections/3-other.md",
     "kit-source/tribulation/positions.md",
     "kit-source/tribulation/question-index.md",
+    "kit-source/tribulation/revelation-guide.md",
+    "kit-source/tribulation/revelation-kjv.txt",
     "kit-source/tribulation/timeline.md",
     "requirements-legal-protection.txt",
     "scripts/apply_legal_protection.py",
     "scripts/build_kit.py",
     "scripts/build_trib_kit.py",
+    "scripts/data/kjv.txt",
     "terms-of-use.html"
   ]
 }
