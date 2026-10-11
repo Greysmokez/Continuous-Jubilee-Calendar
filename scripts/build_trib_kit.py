@@ -9,6 +9,9 @@ Build the Great Tribulation Q&A kit from its database.
   kit-source/tribulation/question-index.md   the top questions, key verses, papers
   kit-source/tribulation/objections/*.md     common objections, each answered from Scripture
   kit-source/tribulation/entries/*.md        full worked entries (only STATUS: approved are built)
+  kit-source/tribulation/revelation-guide.md Revelation chapter by chapter
+  kit-source/tribulation/revelation-kjv.txt  the full KJV text of Revelation (appendix)
+  scripts/data/kjv.txt                       the full KJV Bible, used only to check quotations
 
 Outputs:
   TribulationKit.txt                   this repo
@@ -19,6 +22,7 @@ Checks (the build stops and publishes nothing if any fail):
   - every approved entry has a QUICK ANSWER, a FULL STUDY, a quoted verse, and a scripturescjc.com paper link
   - every paper link names a page listed in the header
   - the red-flag phrases never appear in the index or the entries
+  - every Scripture quotation followed by a reference matches the KJV word for word
 
 Run locally:
   python scripts/build_trib_kit.py --website-out build-website
@@ -91,6 +95,34 @@ def check_objections(path: Path, text: str, pages: set[str]) -> None:
                 fail(f"{path.name}: '{title}' cites {page}, which is not in the header's paper list")
 
 
+def _norm(s: str) -> str:
+    s = s.lower().replace("\u2019", "'").replace("\u00e6", "ae")
+    s = re.sub(r"\[[^\]]*\]", " ", s)          # [insertions] are not Scripture
+    s = re.sub(r"[^a-z' ]+", " ", s).replace("'", "")
+    return " " + re.sub(r"\s+", " ", s).strip() + " "
+
+
+_BIBLE = None
+_QUOTE = re.compile(
+    r"[\"\u201c]([^\"\u201c\u201d\n]{8,}?)[\"\u201d]"
+    r"\s*,?\s*\(?\s*(?:see\s+)?(?:[1-3] )?(?:[A-Z][a-z]+(?: of [A-Z][a-z]+)? )?\d+:\d+"
+)
+
+
+def check_quotes(label: str, text: str) -> None:
+    """Every quotation followed by a verse reference must appear word for word in the KJV.
+    '...' marks an omission; each piece of three words or more is checked."""
+    global _BIBLE
+    if _BIBLE is None:
+        lines = (ROOT / "scripts" / "data" / "kjv.txt").read_text(encoding="utf-8").splitlines()
+        _BIBLE = _norm(" ".join(l.split("\t", 1)[1] for l in lines if "\t" in l))
+    for m in _QUOTE.finditer(text):
+        for seg in re.split(r"\.\.\.|\u2026", m.group(1)):
+            words = _norm(seg).split()
+            if len(words) >= 3 and " " + " ".join(words) + " " not in _BIBLE:
+                fail(f"{label}: quotation does not match the KJV: \"{seg.strip()}\"")
+
+
 def scan_red_flags(label: str, text: str) -> None:
     for why, pat in RED_FLAGS.items():
         m = re.search(pat, text)
@@ -118,11 +150,20 @@ def main() -> int:
 
     index = read("question-index.md")
     scan_red_flags("question-index.md", index)
+    guide = read("revelation-guide.md")
+    scan_red_flags("revelation-guide.md", guide)
+    for name, body in (("positions.md", read("positions.md")), ("timeline.md", read("timeline.md")),
+                       ("question-index.md", index), ("revelation-guide.md", guide)):
+        check_quotes(name, body)
+    revelation = read("revelation-kjv.txt")
+    if revelation.count("\n") < 420 or "22:21 The grace of our Lord Jesus Christ be with you all. Amen." not in revelation:
+        fail("revelation-kjv.txt looks incomplete (expected all 404 verses)")
 
     objections = []
     for path in sorted((SRC / "objections").glob("*.md")):
         text = path.read_text(encoding="utf-8").strip()
         check_objections(path, text, pages)
+        check_quotes(path.name, text)
         # The claim lines state the other view on purpose, so only the answers are scanned.
         answers = "\n".join(l for l in text.splitlines() if not l.startswith(("### ", "Keywords:")))
         scan_red_flags(path.name, answers)
@@ -136,6 +177,7 @@ def main() -> int:
             print(f"Skipping {path.name} (not approved)")
             continue
         check_entry(path, text, pages)
+        check_quotes(path.name, text)
         scan_red_flags(path.name, text)
         entries.append(to_plain(text))
 
@@ -145,8 +187,10 @@ def main() -> int:
         "TIMELINE\n\n" + to_plain(read("timeline.md")),
         "HOW THE DATES ARE DETERMINED\n\n" + to_plain(read("cjc-math.md")),
         "QUESTION INDEX\n\n" + to_plain(index),
+        "REVELATION, CHAPTER BY CHAPTER\n\n" + to_plain(guide),
         "COMMON OBJECTIONS, ANSWERED\n\n" + "\n\n".join(objections),
         "WORKED EXAMPLES (full entries)\n\n" + "\n\n----------\n\n".join(entries),
+        "APPENDIX: " + revelation,
         "References: Scripture quotations are from the King James Version. The Jubilee rule for prophetic time, "
         "the censer as the start of the count, and the day-1,290 decree framework draw on the research of Larry Wilson, "
         "who presented his timelines as examples, not dates.",
