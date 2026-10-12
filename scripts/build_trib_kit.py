@@ -197,9 +197,11 @@ def main() -> int:
         "who presented his timelines as examples, not dates.",
     ]
     kit = "\n\n==========\n\n".join(parts) + "\n"
-    # The author is named only in the header's "who wrote this" rule (and the Wilson credit names Wilson).
-    if kit.count("Chip") != 1 or "Chip Welsh, the author" not in kit:
-        fail("The author's name must appear only once, in the header rule for when a user asks who wrote the research.")
+    # The author is named only in the header's "who wrote this" rule, plus (optionally) the copyright notice line.
+    notice = "\u00a9 2026 Chip Welsh. All Rights Reserved."
+    n = kit.count("Chip")
+    if "Chip Welsh, the author" not in kit or not (n == 1 or (n == 2 and notice in kit)):
+        fail("The author's name may appear only in the header rule for when a user asks who wrote the research, and in the copyright notice.")
 
     (ROOT / "TribulationKit.txt").write_text(kit, encoding="utf-8")
     print("Wrote TribulationKit.txt")
