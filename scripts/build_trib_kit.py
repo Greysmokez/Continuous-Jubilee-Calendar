@@ -147,6 +147,9 @@ def main() -> int:
     args = ap.parse_args()
 
     header = read("header.txt")
+    for need in ("21. Some questions belong to the companion CJC Research Kit", "https://scripturescjc.com/kit.txt"):
+        if need not in header:
+            fail(f"header.txt: missing required text: {need}")
     pages = set(re.findall(r"https://scripturescjc\.com/([\w-]+\.(?:html|txt))", header))
 
     index = read("question-index.md")
