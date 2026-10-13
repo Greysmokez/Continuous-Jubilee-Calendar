@@ -147,7 +147,7 @@ def main() -> int:
     args = ap.parse_args()
 
     header = read("header.txt")
-    for need in ("21. Some questions belong to the companion CJC Research Kit", "https://scripturescjc.com/kit.txt"):
+    for need in ("21. Some questions belong to the companion CJC Research Kit", "https://scripturescjc.com/kit.txt", "22. When a user asks about any beast", "Opening message. When the kit has just been pasted"):
         if need not in header:
             fail(f"header.txt: missing required text: {need}")
     pages = set(re.findall(r"https://scripturescjc\.com/([\w-]+\.(?:html|txt))", header))
@@ -155,6 +155,8 @@ def main() -> int:
     index = read("question-index.md")
     scan_red_flags("question-index.md", index)
     guide = read("revelation-guide.md")
+    if "## The beasts of Daniel and Revelation, defined by Scripture" not in guide:
+        fail("revelation-guide.md: missing the beasts section")
     scan_red_flags("revelation-guide.md", guide)
     for name, body in (("positions.md", read("positions.md")), ("timeline.md", read("timeline.md")),
                        ("question-index.md", index), ("revelation-guide.md", guide)):
@@ -162,6 +164,9 @@ def main() -> int:
     revelation = read("revelation-kjv.txt")
     if revelation.count("\n") < 420 or "22:21 The grace of our Lord Jesus Christ be with you all. Amen." not in revelation:
         fail("revelation-kjv.txt looks incomplete (expected all 404 verses)")
+    daniel = read("daniel-kjv.txt")
+    if len(re.findall(r"^\d+:\d+ ", daniel, re.M)) != 357 or "12:13 But go thou thy way till the end be: for thou shalt rest, and stand in thy lot at the end of the days." not in daniel:
+        fail("daniel-kjv.txt looks incomplete (expected all 357 verses)")
 
     objections = []
     for path in sorted((SRC / "objections").glob("*.md")):
@@ -195,6 +200,7 @@ def main() -> int:
         "COMMON OBJECTIONS, ANSWERED\n\n" + "\n\n".join(objections),
         "WORKED EXAMPLES (full entries)\n\n" + "\n\n----------\n\n".join(entries),
         "APPENDIX: " + revelation,
+        "APPENDIX: " + daniel,
         "References: Scripture quotations are from the King James Version. The Jubilee rule for prophetic time, "
         "the censer as the start of the count, and the day-1,290 decree framework draw on the research of Larry Wilson, "
         "who presented his timelines as examples, not dates.",
