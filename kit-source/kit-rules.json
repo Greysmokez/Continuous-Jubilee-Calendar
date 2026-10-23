@@ -112,6 +112,14 @@
   {
    "text": "23. The Early and the Latter Rain — How the Holy Spirit Sowed the Gospel, and How He Will Ripen the Harvest.",
    "why": "Research Library entry for The Early and the Latter Rain"
+  },
+  {
+   "text": "24. Unto Caesar, and Unto God — How Church and Empire Joined Hands, the Man Who Was Bought to Sit Between Them, and the 1,260 Years Daniel Foresaw.",
+   "why": "Research Library entry for Unto Caesar, and Unto God"
+  },
+  {
+   "text": "A CJC year runs from spring to spring",
+   "why": "Spring-to-spring year rule for events in January to early March (Exodus 12:2)"
   }
  ],
  "must_not_include": [
@@ -138,6 +146,10 @@
   {
    "text": "the year immediately after the Jubilee",
    "why": "Retired v12.20: the 701 BC campaign falls inside the Jubilee's rest year"
+  },
+  {
+   "text": "found unsupported on every mechanism attempted",
+   "why": "Retired October 23, 2026: the little horn and the 1,260 years (538-1798) are now covered by the paper Unto Caesar, and Unto God"
   }
  ]
 }
