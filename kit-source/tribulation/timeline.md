@@ -12,7 +12,7 @@ Daniel's end-time count is 1,260, 1,290 and 1,335 days (Daniel 12:7, 11-12; Reve
 
 Already fulfilled
 1. The Lamb receives the book. "And he came and took the book out of the right hand of him that sat upon the throne" (Revelation 5:7); Daniel saw the same court: "there was given him dominion, and glory, and a kingdom" (Daniel 7:13-14). This research places it after the 1,260 years of the woman in the wilderness ended (1798; Revelation 12:6, 14); Scripture gives no year.
-2. Seals one through three, the white, red and black horses, open after the 1,260 years end and "the judgment shall sit" (Daniel 7:25-26; Revelation 6:1-6): the gospel goes out, division and persecution follow, and the heavenly court weighs every life. They are still running; Scripture gives them no measured length, so no exact years are given. The fourth seal, the pale horse, is still future (milestone 4).
+2. Seals one through three, the white, red and black horses, open after the 1,260 years end and "the judgment shall sit" (Daniel 7:25-26; Revelation 6:1-6): the Lamb, crowned, goes forth to conquer, the sword of the Word is given and division and bloodshed follow, and the heavenly court weighs every life. Daniel 8:14's 2,300 end in the autumn of 1844, opening the heavenly Day of Atonement, the judgment of God's house (this research's reading; never a date for Christ's return). Seals 1-3 are still running; Scripture gives them no measured length, so no exact years are given. The fourth seal, the pale horse, is still future (milestone 4).
 
 Before the tribulation (future)
 3. The pause. The four winds are held "till we have sealed the servants of our God in their foreheads" (7:1-3); the 144,000 are sealed (7:4).
