@@ -28,6 +28,7 @@ Matthew 23:36's "this generation" is the forty years from the cross (AD 30) to t
 - "The coming in AD 70 was spiritual." Jesus warned against a coming no one could see: "if they shall say unto you, Behold, he is in the desert; go not forth: behold, he is in the secret chambers; believe it not. For as the lightning cometh out of the east, and shineth even unto the west; so shall also the coming of the Son of man be" (Matthew 24:26-27). The angels said He would come "in like manner as ye have seen him go into heaven" (Acts 1:11).
 
 ## PAPERS
+- What Was Fulfilled in AD 70, and What Is Still Ahead: https://scripturescjc.com/what-was-fulfilled-in-ad70.html
 - The Five Exoduses: https://scripturescjc.com/five-exoduses.html
 - In Due Time: https://scripturescjc.com/in-due-time.html
 - The Shepherd's Gathering: https://scripturescjc.com/the-shepherds-gathering.html
